@@ -1,15 +1,27 @@
 import operator
+import inflect
 
 
 class SearchEngine:
     searchDictionary = {}
+    inflect_engine = inflect.engine()
 
     def add_to_dictionary(self, tags, data):
         for tag in tags:
+            plural_str = self.inflect_engine.plural(tag)
+            singular_str = self.inflect_engine.singular_noun(tag)
             if tag in self.searchDictionary:
                 self.searchDictionary[tag].add(data)
+                if plural_str != tag:
+                    self.searchDictionary[plural_str].add(data)
+                if singular_str != tag:
+                    self.searchDictionary[singular_str].add(data)
             else:
                 self.searchDictionary[tag] = {data}
+                if plural_str != tag:
+                    self.searchDictionary[plural_str] = {data}
+                if singular_str != tag:
+                    self.searchDictionary[singular_str] = {data}
 
     def search_keys(self, user_input):
         results = {}
