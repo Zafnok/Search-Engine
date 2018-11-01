@@ -1,83 +1,96 @@
-import os.path
+import operator
 
 
 class SearchEngine:
     searchDictionary = {}
 
-    def addToDictionary(self, tags, data):
-
+    def add_to_dictionary(self, tags, data):
         for tag in tags:
             if tag in self.searchDictionary:
-                self.searchDictionary[tag].append(data)
+                self.searchDictionary[tag].add(data)
             else:
                 self.searchDictionary[tag] = {data}
 
-    def searchKeys(self, userInput):
+    def search_keys(self, user_input):
         results = {}
-        if userInput[len(userInput) - 1] == '*':
-            for key in self.searchDictionary.keys():
-                if key.startswith(userInput[0:len(userInput) - 1], 0, len(key)):
-                    results = self.createResultsSet(key, results)
+        if user_input[len(user_input) - 1] == '*':
+            results = self.create_results_set(results, True, user_input)
         else:
-            for key in userInput.split():
-                if key in self.searchDictionary:
-                    results = self.createResultsSet(key, results)
+            results = self.create_results_set(results, False, user_input)
+        results = self.order_dictionary(results)
         if len(results) == 0:
-            tempStr = input("Search returned zero results\nWhat were you searching for?\n")
-            self.addToDictionary(userInput.split(), tempStr)
+            temp_str = input("Search returned zero results\nWhat were you searching for?\nType "
+                             "None if you don't want to add to the engine.\n")
+            if not temp_str.lower().strip() == "none":
+                self.add_to_dictionary(user_input.strip().split(" "), temp_str)
         else:
-            returnStr = ""
-            for key, value in results.items():
-                returnStr += (key + " - hits: " + str(value) + "\n")
-            return returnStr
+            return_str = ""
+            for pair in results:
+                return_str += (pair[0] + " - hits: " + str(pair[1]) + "\n")
+            return return_str
 
-    def createResultsSet(self, key, set):
+    @staticmethod
+    def order_dictionary(dictionary):
+        return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+
+    def create_results_set_helper(self, results_set, key):
         for tag in self.searchDictionary[key]:
-            if tag in set:
-                set[tag] = set[tag] + 1
+            if tag in results_set:
+                results_set[tag] = results_set[tag] + 1
             else:
-                set[tag] = 1
-        return set
+                results_set[tag] = 1
 
-    def writeToFile(self, fileName):
+    def create_results_set(self, results_set, star_present, user_input):
+        if star_present:
+            for key in self.searchDictionary.keys():
+                if key.startswith(user_input[0:len(user_input) - 1], 0, -1):
+                    self.create_results_set_helper(results_set, key)
+        else:
+            for key in user_input.split(" "):
+                if key in self.searchDictionary.keys():
+                    self.create_results_set_helper(results_set, key)
+        return results_set
+
+    def write_to_file(self, file_name):
         try:
-            with open(fileName, 'x+') as dataFile:
+            with open(file_name, 'x+') as dataFile:
                 for key, value in self.searchDictionary.items():
                     dataFile.write(key + " ")
-                    for data in value:
-                        dataFile.write(data + " ")
+                    dataFile.write(", ".join(value))
                     dataFile.write("\n")
         except FileExistsError:
-            with open(fileName, 'r+') as dataFile:
+            with open(file_name, 'w') as dataFile:
                 for key, value in self.searchDictionary.items():
                     dataFile.write(key + " ")
-                    for data in value:
-                        dataFile.write(data + " ")
+                    dataFile.write(", ".join(value))
                     dataFile.write("\n")
 
-    def populateFromFile(self, fileName):
+    def populate_from_file(self, file_name):
         try:
-            with open(fileName, 'r') as dataFile:
+            with open(file_name, 'r') as dataFile:
                 for line in dataFile:
                     line = line.strip("\n")
-                    self.addToDictionary(line[0:line.index(" ")], line[line.index(" ") + 1:])
+                    self.add_to_dictionary({line[0:line.index(" ")]}, line[line.index(" ") + 1:])
         except FileNotFoundError:
             return False
 
 
 def main():
-    searchengine = SearchEngine()
-    searchengine.addToDictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'}, 'ign gaming news')
-    searchengine.addToDictionary({'cars', 'ford', 'toyota', 'honda'}, 'carmax')
-    searchengine.addToDictionary({'jobs', 'careers', 'internships'}, 'indeed')
-    exitFlag = False
-    while not exitFlag:
-        str = input("What would you like to search for?\nType exit to exit\n")
-        if str.lower() == "exit":
-            exitFlag = True
+    search_engine = SearchEngine()
+    if not search_engine.populate_from_file('dataFile.txt'):
+        search_engine.add_to_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'}, 'ign gaming news')
+        search_engine.add_to_dictionary({'cars', 'ford', 'toyota', 'honda'}, 'carmax')
+        search_engine.add_to_dictionary({'jobs', 'careers', 'internships'}, 'indeed')
+    exit_flag = False
+    while not exit_flag:
+        input_str = input("What would you like to search for?\nType exit to exit\n")
+        if input_str.lower() == "exit":
+            exit_flag = True
         else:
-            print(searchengine.searchKeys(str))
-    searchengine.writeToFile("dataFile.txt")
+            output_str = search_engine.search_keys(input_str)
+            if output_str is not None:
+                print(output_str)
+    search_engine.write_to_file("dataFile.txt")
 
 
 main()
