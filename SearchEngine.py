@@ -1,7 +1,10 @@
 import operator
 import inflect
 import yaml
-from Site import Site
+import atexit
+
+
+# TODO use atexit to write on exit
 
 
 # TODO check variable names, some are bad
@@ -15,10 +18,29 @@ class SearchEngine:
     This class describes a search engine that uses a dictionary of tag : Site pairs
     The dictionary's values are sets of Sites and the keys are string tags
     """
-    search_dictionary = {}  # declare the class-level search dictionary
-    inflect_engine = inflect.engine()
+
+    __inflect_engine = inflect.engine()
 
     # inflect is used for natural language processing, turns plurals into singulars and vice versa
+
+    def __init__(self, file_name="data_file.yaml"):  # TODO this is new, make sure it works
+        """
+        This is the constructor for SearchEngine
+        :param file_name: file name for input YAML file
+        """
+        self.search_dictionary = {}
+        self.file_name = file_name
+        self.loaded = self.populate_from_file(self.file_name)
+        atexit.register(self.write_to_file, self.file_name)
+
+    @staticmethod
+    def clean_string(string):
+        """
+        This function cleans a string by removing whitespace and converting it to lowercase
+        :param string: string to clean
+        :return: string.strip().lower()
+        """
+        return string.strip().lower()
 
     @staticmethod
     def order_dictionary(dictionary):
@@ -30,6 +52,7 @@ class SearchEngine:
         """
         return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
 
+    # TODO make tags clean (strip/lower)
     def add_to_dictionary(self, tags, data):
         """
         This functuon adds the tag : data pairing to the dictionary via a for-each loop that checks whether the
@@ -39,10 +62,11 @@ class SearchEngine:
         :return: None
         """
         for tag in tags:
-            if tag in self.search_dictionary:
-                self.search_dictionary[tag].add(data)
+            word = self.clean_string(tag)
+            if word in self.search_dictionary:
+                self.search_dictionary[word].add(data)
             else:
-                self.search_dictionary[tag] = {data}
+                self.search_dictionary[word] = {data}
 
     def search_keys(self, user_input):
         """
@@ -65,7 +89,7 @@ class SearchEngine:
                 return_str = ""
                 for pair in results:
                     return_str += (pair[0].get_site_name() + " - hits: " + str(pair[1]) + "\n")
-            return return_str
+                return return_str
         else:
             return "Invalid input, please try again."
 
@@ -85,41 +109,31 @@ class SearchEngine:
         words which start with the - operator.
         """
         exclude_from_results_set = {}
-        if user_input[len(user_input) - 1] == '*':  # TODO change this to be per-word
+        for word in self.clean_string(user_input).split(" "):
             remove_flag = False
-            try:
-                last_word = user_input[user_input.rindex(" ") + 1:len(user_input) - 1]
-                if last_word[0] == '-':
-                    last_word = last_word[1:]
-                    remove_flag = True
-            except ValueError:  # for when rindex (last index) doesn't find the character
-                last_word = user_input[0:len(user_input) - 1]
-                if last_word[0] == '-':  # can we condense this? multiple of the same if statement
-                    remove_flag = True
-                    last_word = last_word[1:]
-            for key in self.search_dictionary.keys():
-                if key.startswith(last_word):
-                    self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
-            last_index_of_space = user_input.rfind(" ")
-            if last_index_of_space != -1:
-                user_input = user_input[0:last_index_of_space]
-        for key in user_input.split(" "):
-            remove_flag = False
-            word = key
             if word[0] == '-':
                 remove_flag = True
                 word = word[1:]
-            if word in self.search_dictionary.keys():
-                self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
+            if word[len(word) - 1] == '*':
+                word = word[0:len(word) - 1]
+                for key in self.search_dictionary.keys():
+                    if key.startswith(word):
+                        self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
             else:
-                plural_str = self.inflect_engine.plural(word)
-                singular_str = self.inflect_engine.singular_noun(word)
-                if plural_str != word and plural_str in self.search_dictionary.keys():
-                    self.send_to_helper(results_set, exclude_from_results_set, plural_str, remove_flag)
-                elif singular_str != word and singular_str in self.search_dictionary.keys():
-                    self.send_to_helper(results_set, exclude_from_results_set, singular_str, remove_flag)
-        return dict(results_set.items() - exclude_from_results_set.items())
+                if word in self.search_dictionary.keys():
+                    self.send_to_helper(results_set, exclude_from_results_set, word, remove_flag)
+                else:
+                    plural_str = self.__inflect_engine.plural(word)
+                    singular_str = self.__inflect_engine.singular_noun(word)
+                    if plural_str != word and plural_str in self.search_dictionary.keys():
+                        self.send_to_helper(results_set, exclude_from_results_set, plural_str, remove_flag)
+                    elif singular_str != word and singular_str in self.search_dictionary.keys():
+                        self.send_to_helper(results_set, exclude_from_results_set, singular_str, remove_flag)
+        return {k: v for k, v in results_set.items() if k not in exclude_from_results_set}
+        # return difference between results_set and exclude_from_results_set based on keys and not key-value pairs
 
+    # TODO keep in mind, this might use more memory than a series of if-else statements in previous function.
+    # TODO Speed tests showed similar results, but memory test is TBD
     def send_to_helper(self, results_set, exclude_from_results_set, key, remove_flag):
         """
         This function calls create_results_set_helper based on if the key starts with - or not.
@@ -137,7 +151,7 @@ class SearchEngine:
         else:
             self.create_results_set_helper(results_set, key)
 
-    # TODO doesn't need to do hits for exclude_results_set
+    # TODO doesn't need to do hits for exclude_results_set - maybe add parameter remove_flag
     def create_results_set_helper(self, results_set, key):
         """
         Populates the dictionary with the number of hits.
@@ -177,25 +191,3 @@ class SearchEngine:
             return True
         except FileNotFoundError:
             return False
-
-
-def main():
-    search_engine = SearchEngine()
-    if not search_engine.populate_from_file('data_file.yaml'):
-        search_engine.add_to_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'cars', 'ps4'},
-                                        Site('ign gaming news', 'gaming'))
-        search_engine.add_to_dictionary({'cars', 'ford', 'toyota', 'honda'}, Site('carmax', 'cars'))
-        search_engine.add_to_dictionary({'jobs', 'careers', 'internships'}, Site('indeed', 'jobs'))
-    exit_flag = False
-    while not exit_flag:
-        input_str = input("What would you like to search for?\nType exit to exit\n")
-        if input_str.lower() == "exit":
-            exit_flag = True
-        else:
-            output_str = search_engine.search_keys(input_str)
-            if output_str is not None:
-                print(output_str)
-    search_engine.write_to_file("data_file.yaml")
-
-
-main()
