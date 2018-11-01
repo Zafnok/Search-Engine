@@ -1,3 +1,6 @@
+import os.path
+
+
 class SearchEngine:
     searchDictionary = {}
 
@@ -36,10 +39,34 @@ class SearchEngine:
                 set[tag] = 1
         return set
 
+    def writeToFile(self, fileName):
+        try:
+            with open(fileName, 'x+') as dataFile:
+                for key, value in self.searchDictionary.items():
+                    dataFile.write(key + " ")
+                    for data in value:
+                        dataFile.write(data + " ")
+                    dataFile.write("\n")
+        except FileExistsError:
+            with open(fileName, 'r+') as dataFile:
+                for key, value in self.searchDictionary.items():
+                    dataFile.write(key + " ")
+                    for data in value:
+                        dataFile.write(data + " ")
+                    dataFile.write("\n")
+
+    def populateFromFile(self, fileName):
+        try:
+            with open(fileName, 'r') as dataFile:
+                for line in dataFile:
+                    line = line.strip("\n")
+                    self.addToDictionary(line[0:line.index(" ")], line[line.index(" ") + 1:])
+        except FileNotFoundError:
+            return False
+
 
 def main():
     searchengine = SearchEngine()
-    #dataFile = open('dataFile', 'r+')
     searchengine.addToDictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'}, 'ign gaming news')
     searchengine.addToDictionary({'cars', 'ford', 'toyota', 'honda'}, 'carmax')
     searchengine.addToDictionary({'jobs', 'careers', 'internships'}, 'indeed')
@@ -50,6 +77,7 @@ def main():
             exitFlag = True
         else:
             print(searchengine.searchKeys(str))
+    searchengine.writeToFile("dataFile.txt")
 
 
 main()
