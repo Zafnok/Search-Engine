@@ -2,14 +2,16 @@ import operator
 import inflect
 import yaml
 import atexit
+from collections import Counter
+import itertools
 
 
-# TODO use atexit to write on exit
+# TODO use atexit to write on exit - should be done
 
 
 # TODO check variable names, some are bad
-# TODO add NOT/AND/OR - Stack/Queue structure
-# TODO add functionality to write on close
+# TODO add NOT/AND/OR - Stack/Queue structure - notes in notebook
+# TODO add functionality to write on close - should be done
 # TODO add categories to sites - i.e. news/gaming/math etc - metadata of site should explain
 # TODO webcrawl
 
@@ -76,10 +78,9 @@ class SearchEngine:
         :param user_input: the string inputted by the user to check against the class-level search_dictionary
         :return: a formatted string that shows the sites and number of hits - sorted by number of hits
         """
-        results = {}
         if len(user_input.strip()) > 0:
-            results = self.create_results_set(results, user_input)
-            results = self.order_dictionary(results)
+            results = self.order_dictionary(
+                self.create_results_set_helper(self.interpret_input(self.clean_string(user_input))))
             if len(results) == 0:
                 new_tag_str = input("Search returned zero results\nWhat were you searching for?\nType "
                                     "None if you don't want to add to the engine.\n")
@@ -93,10 +94,87 @@ class SearchEngine:
         else:
             return "Invalid input, please try again."
 
+    # TODO stacks/queues structure, recursion? Old assignment doesn't return anything, just adds string to stack
+    @staticmethod
+    def interpret_input(user_input):
+        postfix_string = ""
+        operator_stack = []
+        open_parentheses = 0
+        open_quotes = False
+        quote_word = ""
+        word_check = False  # True when there is a word, if True then next word w/o operator in between has implied OR
+        num_implied_or_to_add = 0  # counts number of ors for parentheses
+        print(list(
+            itertools.chain.from_iterable(
+                [outer_string.split() if outer_index % 2 == 0 else ["\"" + outer_string + "\""] for
+                 outer_index, outer_string in
+                 enumerate(
+                     [inner_string.strip() for inner_string in SearchEngine.clean_string(user_input).split("\"") if
+                      inner_string.strip() is not None and inner_string.strip() != ""])])))
+        # inner-most list comprehension splits based on quotes and filters to check if the strip returns an empty string
+        # TODO maybe better way to check if string empty
+        # next-level out list comprehension conditionally splits - if the index is even, it will split on spaces,
+        # other-wise (quoted strings) it will return a list of the one element, enclosed by quotes
+        # final-level could have been done with comprehension but would be slower -
+        # basically flattens the list of lists to make one single list
+
+        # old for loop used SearchEngine.clean_string(user_input).split(" ")
+        for word in SearchEngine.clean_string(user_input).split(" "):
+            if word[0] == '(':
+                if len(operator_stack) == 0 and len(postfix_string) != 0:
+                    num_implied_or_to_add += 1
+                operator_stack.append(word[0])
+                open_parentheses += 1
+                word = word[1:]
+            if word[0] == '\"' and word[len(word) - 1] == '\"':
+                word = word.replace("\"", "")
+            if word[0] == '\"' or word[len(word) - 1] == '\"':
+                print(word)
+                if len(operator_stack) == 0 and len(postfix_string) != 0:
+                    num_implied_or_to_add += 1
+                open_quotes = not open_quotes
+                if not open_quotes:
+                    postfix_string += (quote_word.replace("\"", "") + word.replace("\"", "") + " ")
+                    quote_word = ""
+                else:
+                    quote_word += (word.replace("\"", "") + " ")
+            else:
+                if word[len(word) - 1] == ')':
+                    word = word[:word.index(')')]
+                    postfix_string += word + " "
+                    open_parentheses -= 1
+                    while operator_stack[-1] != '(':
+                        postfix_string += operator_stack.pop() + " "
+                    operator_stack.pop()
+                elif word == "and" or word == "or":
+                    if open_parentheses == 0 and len(operator_stack) > 0:
+                        postfix_string += operator_stack.pop() + " "
+                    operator_stack.append(word)
+                    word_check = False  # TODO don't know where else needed
+                else:
+                    if open_quotes:
+                        quote_word += (word + " ")
+                    else:
+                        postfix_string += word + " "
+                        if word_check:
+                            postfix_string += "or "
+                        word_check = not word_check
+        while num_implied_or_to_add != 0:
+            operator_stack.append("or")
+            num_implied_or_to_add -= 1
+        while len(operator_stack) > 0:
+            if operator_stack[-1] == '(':
+                operator_stack.pop()
+            else:
+                postfix_string += operator_stack.pop() + " "
+        return postfix_string
+
     # TODO create function to make this more concise
     # TODO make * operator per-word
     # TODO does this need to be so wordy? Look into libraries/use Site more
     # TODO return some Sites based on categories, ask user for category of new Site
+    # TODO quotes make many words one term
+    # TODO NOT operator
     def create_results_set(self, results_set, user_input):
         """
         This function is called by search_keys and creates the actual results set used by search_keys to make the
@@ -108,27 +186,46 @@ class SearchEngine:
         :return: the results_set - excluded_from_results_set which is another dictionary populated by the user_input
         words which start with the - operator.
         """
+
         exclude_from_results_set = {}
-        for word in self.clean_string(user_input).split(" "):
-            remove_flag = False
-            if word[0] == '-':
-                remove_flag = True
-                word = word[1:]
-            if word[len(word) - 1] == '*':
-                word = word[0:len(word) - 1]
-                for key in self.search_dictionary.keys():
-                    if key.startswith(word):
-                        self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
-            else:
-                if word in self.search_dictionary.keys():
-                    self.send_to_helper(results_set, exclude_from_results_set, word, remove_flag)
+        remove_flag_single_char = False
+        if "or" in user_input or "and" in user_input:  # TODO undecided on if use different function
+            stack = []  # TODO better name
+            for word in self.clean_string(user_input).split(" "):
+                if word == "or" or word == "and":  # TODO do we need 2 dicts for exclude/normal for each pop? - set?
+                    dict_one = stack.pop()
+                    dict_two = stack.pop()
+                    if word == "and":
+                        stack.append({key: dict_one[key] for key in dict_one if key in dict_two})
+                    else:
+                        stack.append(Counter(dict_one) + Counter(dict_two))
                 else:
-                    plural_str = self.__inflect_engine.plural(word)
-                    singular_str = self.__inflect_engine.singular_noun(word)
-                    if plural_str != word and plural_str in self.search_dictionary.keys():
-                        self.send_to_helper(results_set, exclude_from_results_set, plural_str, remove_flag)
-                    elif singular_str != word and singular_str in self.search_dictionary.keys():
-                        self.send_to_helper(results_set, exclude_from_results_set, singular_str, remove_flag)
+                    remove_flag = False
+                    if remove_flag_single_char:
+                        remove_flag = True
+                        remove_flag_single_char = False
+                    if word[0] == '-':
+                        remove_flag = True
+                        word = word[1:]
+                        if len(word) == 0:
+                            remove_flag_single_char = True
+                    if not remove_flag_single_char:
+                        if word[len(word) - 1] == '*':
+                            word = word[0:len(word) - 1]
+                            for key in self.search_dictionary.keys():
+                                if key.startswith(word):
+                                    self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
+                        else:
+                            if word in self.search_dictionary.keys():
+                                self.send_to_helper(results_set, exclude_from_results_set, word, remove_flag)
+                            else:
+                                plural_str = self.__inflect_engine.plural(word)
+                                singular_str = self.__inflect_engine.singular_noun(word)
+                                if plural_str != word and plural_str in self.search_dictionary.keys():
+                                    self.send_to_helper(results_set, exclude_from_results_set, plural_str, remove_flag)
+                                elif singular_str != word and singular_str in self.search_dictionary.keys():
+                                    self.send_to_helper(results_set, exclude_from_results_set, singular_str,
+                                                        remove_flag)
         return {k: v for k, v in results_set.items() if k not in exclude_from_results_set}
         # return difference between results_set and exclude_from_results_set based on keys and not key-value pairs
 
@@ -147,24 +244,30 @@ class SearchEngine:
         :return: None
         """
         if remove_flag:
-            self.create_results_set_helper(exclude_from_results_set, key)
+            self.create_results_set_helper(exclude_from_results_set, key, True)
         else:
             self.create_results_set_helper(results_set, key)
 
     # TODO doesn't need to do hits for exclude_results_set - maybe add parameter remove_flag
-    def create_results_set_helper(self, results_set, key):
+    def create_results_set_helper(self, results_set, key, remove_flag=False):
         """
         Populates the dictionary with the number of hits.
         :param results_set: results_set sent by send_to_helper, which came from create_results_set and initially from
         search_keys.
         :param key: Key to check against class-level search_dictionary
+        :param remove_flag: remove_flag which determines whether to add extra data to results_set
         :return: None
         """
-        for tag in self.search_dictionary[key]:
-            if tag in results_set:
-                results_set[tag] = results_set[tag] + 1
-            else:
-                results_set[tag] = 1
+        if remove_flag:
+            for tag in self.search_dictionary[key]:
+                if tag not in results_set:
+                    results_set[tag] = 1
+        else:
+            for tag in self.search_dictionary[key]:
+                if tag in results_set:
+                    results_set[tag] = results_set[tag] + 1
+                else:
+                    results_set[tag] = 1
 
     # TODO make this compatible with any stream so it can be used for server
     def write_to_file(self, file_name):
@@ -180,7 +283,7 @@ class SearchEngine:
             with open(file_name, 'w') as data_file:
                 yaml.dump(self.search_dictionary, data_file)
 
-    # TODO make this compatible with any stream so it can be used for server
+    # TODO make this compatible with any stream so it can be used for server - python open makes stream?
     def populate_from_file(self, file_name):
         """
         Populates the class-level search_dictionary from a YAML file.
