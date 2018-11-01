@@ -15,10 +15,10 @@ if __name__ == "__main__":
         if input_str.lower() == "exit":
             exit_flag = True
         else:
-            print(search_engine.interpret_input(input_str))
+            # print(search_engine.interpret_input(input_str))
             # start = time.time()
-            # output_str = search_engine.search_keys(input_str)
+            output_str = search_engine.search_keys(input_str)
             # end = time.time()
             # print(end - start)
-            # if output_str is not None:
-            #     print(output_str)
+            if output_str is not None:
+                print(output_str)
