@@ -1,0 +1,732 @@
+$1: !!set {'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null}
+'&': !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://travel.virginaustralia.com/': null}
+(denpasar): !!set {'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null}
+(umnrs): !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+'-': !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'https://travel.virginaustralia.com/au/travel-tips': null}
+100+: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null}
+'3': !!set {'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null}
+'500': !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+'80': !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+accelerate: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null}
+accept: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+access: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+accessibility: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+across: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+adelaide: !!set {'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null}
+agreements: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null}
+air: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null}
+aircraft: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+airlines: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'https://www.velocityfrequentflyer.com': null}
+airports: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null}
+airways: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+allowance: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null}
+allowed: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+also: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null}
+always: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+angeles: !!set {'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null}
+app: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+arab: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null}
+around: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+arrival: !!set {'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null}
+assistance: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null}
+atlantic: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+attractive: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+australia: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/': null, 'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/seat-maps/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/fare-types/fare-overview/': null, 'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null,
+  'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null, 'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/core/core/sso/logout.do': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/': null,
+  'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null, 'https://flights.virginaustralia.com': null,
+  'https://flights.virginaustralia.com/en-au/': null, 'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null, 'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-perth': null, 'https://flights.virginaustralia.com/en-au/flights-to-sydney': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://travel.virginaustralia.com/': null, 'https://travel.virginaustralia.com/au/holidays': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.velocityfrequentflyer.com': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+australia's: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+australian: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null}
+available: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null}
+award: !!set {'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null}
+baggage: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null}
+bali: !!set {'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null}
+best: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null, 'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null, 'https://flights.virginaustralia.com/en-au/flights-to-fiji': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null, 'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null, 'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null, 'https://flights.virginaustralia.com/en-au/flights-to-perth': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null, 'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+bonus: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+book: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null,
+  'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null, 'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null, 'https://flights.virginaustralia.com/en-au/flights-to-fiji': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null, 'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null, 'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null, 'https://flights.virginaustralia.com/en-au/flights-to-perth': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null, 'https://travel.virginaustralia.com/': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.virginaustralia.com/au/cn/': null, 'https://www.virginaustralia.com/hk/zh/': null}
+booking: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null}
+brisbane: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null}
+"britain\xE2\x80\x99s": !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+business: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+cabin: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+card: !!set {'https://www.velocityfrequentflyer.com': null}
+carrier: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null}
+carry-on: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null}
+cars: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+certain: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+changing: !!set {'http://www.virginaustralia.com/au/en/plan/fare-types/fare-overview/': null}
+charter: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+cheaper: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+check: !!set {'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null}
+children: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null}
+"child\xE2\x80\x99s": !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+china: !!set {'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null}
+choice: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+chose: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null}
+circumstances: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+cites: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+cities: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+classes: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+coast: !!set {'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null}
+codeshare: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+comfort: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+commitment: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+committed: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+companies: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null}
+condition: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null}
+connection: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/connecting-flights/': null}
+contains: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+continents: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+contractors: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null}
+convenient: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+countries: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+credit: !!set {'https://www.velocityfrequentflyer.com': null}
+customs: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null}
+deals: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null, 'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-perth': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null, 'https://travel.virginaustralia.com/au/holidays': null}
+delta: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null}
+departure: !!set {'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null}
+describes: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+description: !!set {'https://bookings.medicaltravelcompanions.com/aff/va/bje0v5h6': null}
+destinations: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null,
+  'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://travel.virginaustralia.com/au/holidays': null, 'https://travel.virginaustralia.com/au/travel-tips': null,
+  'https://www.virginaustralia.com/au/cn/': null, 'https://www.virginaustralia.com/hk/zh/': null}
+devices: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+dietary: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+different: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+differently: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+difficulties: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+disabilities: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+discover: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null, 'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-perth': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null}
+discuss: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+diverse: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+doctor: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+dog: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null}
+domestic: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/connecting-flights/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+download: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+duty: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null}
+earn: !!set {'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.velocityfrequentflyer.com': null}
+easy: !!set {'https://www.velocityfrequentflyer.com': null}
+elderly: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+electronic: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+eligible: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+emirates: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null}
+enjoyable: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+ensure: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+entertainment: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null}
+etihad: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null}
+everyday: !!set {'https://www.velocityfrequentflyer.com': null}
+exceeds: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+expectations: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+experience: !!set {'http://www.virginaustralia.com/au/en/experience/': null, 'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+experienced: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+explore: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://travel.virginaustralia.com/': null, 'https://travel.virginaustralia.com/au/travel-tips': null}
+extras: !!set {'http://www.virginaustralia.com/au/en/bookings/': null}
+fare: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null}
+favourite: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'https://travel.virginaustralia.com/au/holidays': null}
+features: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+field: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+figures: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null}
+fiji: !!set {'https://flights.virginaustralia.com/en-au/flights-to-fiji': null}
+find: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://travel.virginaustralia.com/au/holidays': null, 'https://travel.virginaustralia.com/au/travel-tips': null}
+flag: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null}
+fleet: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/seat-maps/': null}
+flies: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+flight's: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null}
+flights: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null,
+  'http://www.virginaustralia.com/au/en/plan/fare-types/fare-overview/': null, 'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null,
+  'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null, 'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/core/core/sso/logout.do': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/': null,
+  'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null, 'https://flights.virginaustralia.com': null,
+  'https://flights.virginaustralia.com/en-au/': null, 'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null, 'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-perth': null, 'https://flights.virginaustralia.com/en-au/flights-to-sydney': null,
+  'https://www.velocityfrequentflyer.com': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+flyer: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://www.velocityfrequentflyer.com': null}
+flying: !!set {'http://www.virginaustralia.com/au/en/experience/': null, 'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null}
+fragile: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+free: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null,
+  'https://www.velocityfrequentflyer.com': null}
+frequent: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://www.velocityfrequentflyer.com': null}
+frontrunner: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+fully: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+get: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://www.velocityfrequentflyer.com': null}
+global: !!set {'https://www.velocityfrequentflyer.com': null}
+globe: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+gold: !!set {'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null}
+great: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'https://travel.virginaustralia.com/au/holidays': null}
+group: !!set {'https://www.velocityfrequentflyer.com': null}
+guests: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/connecting-flights/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null,
+  'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null}
+guides: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null}
+haul: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+hawaiian: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null}
+hearing: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null}
+highest: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null}
+holidays: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://flights.virginaustralia.com/en-au/flights-to-fiji': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null, 'https://travel.virginaustralia.com/': null,
+  'https://travel.virginaustralia.com/au/holidays': null, 'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://travel.virginaustralia.com/au/travel-tips': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+hong: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null}
+hotels: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.virginaustralia.com/au/cn/': null, 'https://www.virginaustralia.com/hk/zh/': null}
+impaired: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null}
+importance: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+in-flight: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null}
+including: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+indonesia: !!set {'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null}
+infants: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+information: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/': null, 'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/connecting-flights/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null,
+  'http://www.virginaustralia.com/au/en/plan/fare-types/fare-overview/': null, 'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null}
+inspiration: !!set {'https://travel.virginaustralia.com/au/travel-tips': null}
+insurance: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+intend: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+interline: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null}
+international: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/connecting-flights/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null}
+iphone: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+items: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+join: !!set {'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://www.velocityfrequentflyer.com': null}
+journey: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+kong: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null}
+largest: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+like: !!set {'https://travel.virginaustralia.com/au/travel-tips': null}
+limited: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+lines: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null}
+list: !!set {'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null}
+local: !!set {'https://travel.virginaustralia.com/au/travel-tips': null}
+location: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+long: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null, 'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+long-haul: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null}
+los: !!set {'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null}
+lounge: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null}
+loyalty: !!set {'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null}
+luke: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null}
+magazine: !!set {'https://travel.virginaustralia.com/': null}
+major: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+manage: !!set {'http://www.virginaustralia.com/au/en/bookings/': null, 'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+mangan: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null}
+many: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null,
+  'https://www.velocityfrequentflyer.com': null}
+maps: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/seat-maps/': null}
+match: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+meals: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+medical: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+melbourne: !!set {'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null}
+members: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null}
+menu: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null}
+minors: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+much: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+national: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null}
+needs: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+new: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null}
+next: !!set {'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://www.velocityfrequentflyer.com': null}
+number: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+offers: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null, 'https://travel.virginaustralia.com/': null}
+on-time: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null}
+onboard: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+one: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+one-stop: !!set {'https://travel.virginaustralia.com/': null}
+online: !!set {'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null, 'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null, 'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null, 'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-perth': null, 'https://flights.virginaustralia.com/en-au/flights-to-sydney': null}
+operated: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+operates: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+operation: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null,
+  'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null}
+options: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null}
+oversized: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+packages: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'https://travel.virginaustralia.com/au/holidays': null}
+paramount: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null}
+partner: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/': null, 'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null}
+partnered: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null}
+partnerships: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null}
+party: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+per: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null}
+personal: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+perth: !!set {'https://flights.virginaustralia.com/en-au/flights-to-perth': null}
+pet: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null}
+place: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+planning: !!set {'https://travel.virginaustralia.com/': null}
+plans: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null,
+  'https://travel.virginaustralia.com/': null}
+points: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.velocityfrequentflyer.com': null}
+port: !!set {'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null}
+possible: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+powerful: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/our-fleet/': null}
+pregnant: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+premium: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null}
+price: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null}
+pride: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+priority: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+program: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://travel.virginaustralia.com/au/holidays': null, 'https://www.velocityfrequentflyer.com': null}
+promise: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+proud: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+prove: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null}
+provide: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+providing: !!set {'https://www.velocityfrequentflyer.com': null}
+purchases: !!set {'https://www.velocityfrequentflyer.com': null}
+range: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null}
+reading: !!set {'https://travel.virginaustralia.com/au/travel-tips': null}
+receive: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+recommend: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+regional: !!set {'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null}
+require: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+research: !!set {'https://travel.virginaustralia.com/': null}
+reward: !!set {'https://www.velocityfrequentflyer.com': null}
+right: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null}
+safe: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/domestic-australian-on-time-peformance/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+safely: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+safety: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+satisfy: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+save: !!set {'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null, 'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null, 'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null, 'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-perth': null, 'https://flights.virginaustralia.com/en-au/flights-to-sydney': null}
+search: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null}
+seat: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/seat-maps/': null}
+second: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+section: !!set {'https://travel.virginaustralia.com/au/travel-tips': null}
+select: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/on-board-menu/': null}
+selection: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null}
+seriously: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+service: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null}
+service.our: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null}
+serving: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+shop: !!set {'https://travel.virginaustralia.com/': null}
+short: !!set {'http://www.virginaustralia.com/au/en/plan/baggage/carry-on-baggage/': null,
+  'http://www.virginaustralia.com/au/en/plan/baggage/oversized-fragile-items/': null}
+short-haul: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null}
+singapore: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null}
+site: !!set {'https://travel.virginaustralia.com/': null}
+socialise: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null}
+sooner: !!set {'https://www.velocityfrequentflyer.com': null}
+space: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+specials: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/special-meals/': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null}
+spend: !!set {'https://www.velocityfrequentflyer.com': null}
+spent^: !!set {'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null}
+standards: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/service-promise/': null}
+states: !!set {'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null}
+sydney: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null}
+take: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null}
+team: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null}
+telecommunication: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+things: !!set {'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://travel.virginaustralia.com/au/travel-tips': null, 'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null}
+third: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+three: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null}
+time: !!set {'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null}
+tips: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null,
+  'https://travel.virginaustralia.com/au/travel-tips': null}
+today: !!set {'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null, 'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-perth': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-sydney': null, 'https://travel.virginaustralia.com/au/holidays': null,
+  'https://travel.virginaustralia.com/au/travel-tips': null, 'https://www.velocityfrequentflyer.com': null}
+transfer: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-transfers/': null}
+travel: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/duty-free-and-customs/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null,
+  'http://www.virginaustralia.com/core/core/sso/logout.do': null, 'http://www.virginaustralia.com/nz/en/': null,
+  'https://travel.virginaustralia.com/': null, 'https://travel.virginaustralia.com/au/travel-tips': null,
+  'https://www.virginaustralia.com/au/cn/': null, 'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+travelling: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null}
+try: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+unaccompanied: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children-travelling-alone/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+united: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null}
+unwind: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null}
+upcoming: !!set {'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null}
+us: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+use: !!set {'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/use-of-electronics/': null}
+utmost: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/infants/': null}
+valet: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/valet-parking/': null}
+velocity: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.velocityfrequentflyer.com': null}
+virgin: !!set {'http://www.virginaustralia.com/ae/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/au/en/bookings/': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/##': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#content': null,
+  'http://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/#mega-nav': null,
+  'http://www.virginaustralia.com/au/en/bookings/holidays/holiday-packages/?route=/bhspecials/list/class/box_office': null,
+  'http://www.virginaustralia.com/au/en/destinations/inspiration/destination-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/': null, 'http://www.virginaustralia.com/au/en/experience/airline-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/hawaiian-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/other-partners/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/singapore-airlines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/airport-guides/': null,
+  'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/accelerate/': null,
+  'http://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/cabin-classes/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/in-flight-entertainment/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-board-the-flight/seat-maps/': null,
+  'http://www.virginaustralia.com/au/en/experience/on-the-move/virgin-australia-app/': null,
+  'http://www.virginaustralia.com/au/en/experience/service-experience/customer-service-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/fare-types/fare-overview/': null, 'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/accessibility-plan/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/children/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/medical-conditions/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/pets/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/travelling-with-an-assistance-dog/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null,
+  'http://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'http://www.virginaustralia.com/au/en/specials-offers/': null, 'http://www.virginaustralia.com/cn/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/core/core/sso/logout.do': null, 'http://www.virginaustralia.com/eu/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/hk/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/nz/en/': null,
+  'http://www.virginaustralia.com/nz/en/bookings/flights/make-a-booking/': null, 'http://www.virginaustralia.com/uk/en/bookings/flights/make-a-booking/': null,
+  'http://www.virginaustralia.com/us/en/bookings/flights/make-a-booking/': null, 'https://flights.virginaustralia.com/en-au/flights-to-adelaide': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-brisbane': null, 'https://flights.virginaustralia.com/en-au/flights-to-denpasar': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-fiji': null, 'https://flights.virginaustralia.com/en-au/flights-to-gold-coast': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-hong-kong': null, 'https://flights.virginaustralia.com/en-au/flights-to-los-angeles': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-melbourne': null, 'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-perth': null, 'https://flights.virginaustralia.com/en-au/flights-to-sydney': null,
+  'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null,
+  'https://travel.virginaustralia.com/': null, 'https://travel.virginaustralia.com/au/holidays': null,
+  'https://travel.virginaustralia.com/au/holidays/hotels?cmpid=VA_Homepage_Bookings_TravelExtras': null,
+  'https://www.velocityfrequentflyer.com': null, 'https://www.virginaustralia.com/au/cn/': null,
+  'https://www.virginaustralia.com/au/en/bookings/manage-my-bookings/check-in/': null,
+  'https://www.virginaustralia.com/au/en/experience/business-travel/corporate-client-benefits/': null,
+  'https://www.virginaustralia.com/au/en/plan/timetables-route-maps/flight-timetables/': null,
+  'https://www.virginaustralia.com/hk/zh/': null}
+virginaustralia.com: !!set {'https://flights.virginaustralia.com': null, 'https://flights.virginaustralia.com/en-au/': null}
+vision: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/vision-hearing-impairments/': null}
+visitors: !!set {'http://www.virginaustralia.com/au/en/experience/operational-performance/safety/': null}
+voyeur: !!set {'https://travel.virginaustralia.com/': null}
+ways: !!set {'https://www.velocityfrequentflyer.com': null}
+we'll: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+website: !!set {'http://www.virginaustralia.com/au/en/bookings/flights/fare-promise/': null}
+welcome: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}
+winning: !!set {'https://join.velocityfrequentflyer.com/?channelname=dynamic&promocode=vaustralia': null}
+women: !!set {'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/flying-while-pregnant/': null}
+work: !!set {'http://www.virginaustralia.com/au/en/experience/at-the-airport/lounge/': null}
+world: !!set {'http://www.virginaustralia.com/au/en/': null, 'http://www.virginaustralia.com/core/core/sso/logout.do': null,
+  'http://www.virginaustralia.com/nz/en/': null, 'https://flights.virginaustralia.com': null,
+  'https://flights.virginaustralia.com/en-au/': null, 'https://travel.virginaustralia.com/': null,
+  'https://www.virginaustralia.com/au/cn/': null, 'https://www.virginaustralia.com/hk/zh/': null}
+"world\xE2\x80\x99s": !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null}
+zealand: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'https://flights.virginaustralia.com/en-au/flights-to-new-zealand': null}
+zealand's: !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null}
+"\xE2\x80\x93": !!set {'http://www.virginaustralia.com/au/en/experience/airline-partners/air-new-zealand/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/delta-air-lines/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/etihad-airways/': null,
+  'http://www.virginaustralia.com/au/en/experience/airline-partners/virgin-atlantic/': null,
+  'http://www.virginaustralia.com/au/en/plan/specific-needs-assistance/independent-travel-criteria/': null}

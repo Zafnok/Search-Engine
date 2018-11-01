@@ -5,9 +5,10 @@ import atexit
 from collections import Counter
 import itertools
 import re
+from nltk.corpus import stopwords
 
 
-# TODO use atexit to write on exit - should be done
+# TODO rename file
 
 
 # TODO check variable names, some are bad
@@ -37,13 +38,14 @@ class SearchEngine:
         atexit.register(self.write_to_file, self.file_name)
 
     @staticmethod
-    def clean_string(string):
+    def clean_string(user_string):
         """
         This function cleans a string by removing whitespace and converting it to lowercase
-        :param string: string to clean
+        :param user_string: string to clean
         :return: string.strip().lower()
         """
-        return string.strip().lower()
+        return re.sub("[,:!?]", "", user_string.strip().lower().strip('.'))
+        # return user_string.strip().lower().translate()(maketrans(string.punctuation)
 
     @staticmethod
     def order_dictionary(dictionary):
@@ -60,17 +62,26 @@ class SearchEngine:
     def add_to_dictionary(self, tags, data):
         """
         This functuon adds the tag : data pairing to the dictionary via a for-each loop that checks whether the
-        tag (key) is already in the dictionary
+        tag (key) or its variants (plural/singular) is already in the dictionary
         :param tags: set of tags that are associated with the data
         :param data: Site to add to the value for each of the tags
         :return: None
         """
+        tags = set([word for word in tags if word not in stopwords.words('english')])
         for tag in tags:
             word = self.clean_string(tag)
-            if word in self.search_dictionary:
-                self.search_dictionary[word].add(data)
-            else:
-                self.search_dictionary[word] = {data}
+            if word not in set(stopwords.words('english')):  # common words from nltk
+                if word in self.search_dictionary:
+                    self.search_dictionary[word].add(data)
+                else:
+                    plural_str = self.__inflect_engine.plural(word)
+                    singular_str = self.__inflect_engine.singular_noun(word)
+                    if plural_str in self.search_dictionary:
+                        self.search_dictionary[plural_str].add(data)
+                    elif singular_str in self.search_dictionary:
+                        self.search_dictionary[singular_str].add(data)
+                    else:
+                        self.search_dictionary[word] = {data}
 
     def search_keys(self, user_input):
         """
@@ -91,7 +102,9 @@ class SearchEngine:
             else:
                 return_str = ""
                 for pair in results:
-                    return_str += (pair[0].get_site_name() + " - hits: " + str(pair[1]) + "\n")
+                    return_str += (pair[0] + " - hits: " + str(
+                        pair[1]) + "\n")  # TODO eventually convert back to Site object
+                    # return_str += (pair[0].get_site_name() + " - hits: " + str(pair[1]) + "\n")
                 return return_str
         else:
             return "Invalid input, please try again."
@@ -159,18 +172,17 @@ class SearchEngine:
         return postfix_string
 
         # TODO create function to make this more concise
-        # TODO make * operator per-word
-        # TODO does this need to be so wordy? Look into libraries/use Site more
-        # TODO return some Sites based on categories, ask user for category of new Site
-        # TODO quotes make many words one term
-        # TODO NOT operator
+        # TODO make * operator per-word - done
+        # TODO does this need to be so wordy? Look into libraries/use Site more - can be condensed
+        # TODO return some Sites based on categories, ask user for category of new Site - needs to be implemented still
+        # TODO quotes make many words one term - should be done, need to test tags
+        # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
     def create_results_set(self, user_input):
         """
         This function is called by search_keys and creates the actual results set used by search_keys to make the
         formatted return string. By using the - operator, the word will be added to a dictionary that is subtracted
         from the normal result set. This function calls send_to_helper.
-        :param results_set: results_set is the dictionary sent by search_keys
         :param user_input: user_input is  also sent by search_keys and is used to check each word against the
         class-level's search_dictionary keys.
         :return: the results_set - excluded_from_results_set which is another dictionary populated by the user_input
@@ -180,8 +192,8 @@ class SearchEngine:
         remove_flag_single_char = False
         dictionary_stack = []  # TODO better name
         for word in self.clean_string(user_input).split(" "):
-            if word == "or" or word == "and":  # TODO do we need 2 dicts for exclude/normal for each pop? - set?
-                dict_one_list = dictionary_stack.pop()  # TODO convert tuple to set probably
+            if word == "or" or word == "and":
+                dict_one_list = dictionary_stack.pop()  # TODO convert tuple to set probably - done
                 dict_two_list = dictionary_stack.pop()
                 if word == "and":
                     dictionary_stack.append([{key: dict_one_list[0][key] for key in dict_one_list[0] if
@@ -229,6 +241,8 @@ class SearchEngine:
                             elif singular_str != word and singular_str in self.search_dictionary.keys():
                                 self.create_results_set_helper(dictionary_stack, singular_str,
                                                                remove_flag)
+                            else:  # this is for the cases there are no results - should work
+                                dictionary_stack.append([{}, {}])
         print(dictionary_stack)
         return {k: v for k, v in dictionary_stack[0][0].items() if k not in dictionary_stack[0][1]} if len(
             dictionary_stack) >= 1 and len(
@@ -236,8 +250,8 @@ class SearchEngine:
             dictionary_stack[0]) == 1 else {}  # TODO condense return
         # return difference between results_set and exclude_from_results_set based on keys and not key-value pairs
 
-        # TODO keep in mind, this might use more memory than a series of if-else statements in previous function.
-        # TODO Speed tests showed similar results, but memory test is TBD
+        # TODO keep in mind, this might use more memory than a series of if-else statements in previous function. - irrelevant
+        # TODO Speed tests showed similar results, but memory test is TBD - irrelevant
 
     #
     # def send_to_helper(self, dictionary_stack, key, remove_flag):
@@ -257,7 +271,7 @@ class SearchEngine:
     #     else:
     #         self.create_results_set_helper(results_set, key)
 
-    # TODO doesn't need to do hits for exclude_results_set - maybe add parameter remove_flag
+    # TODO doesn't need to do hits for exclude_results_set - maybe add parameter remove_flag - done
     def create_results_set_helper(self, dictionary_stack, key, remove_flag=False):
         """
         Populates the dictionary with the number of hits.
