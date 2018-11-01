@@ -2,33 +2,26 @@ import operator
 import inflect
 
 
+# TODO check variable names, some are bad
+# TODO add NOT/AND/OR
 class SearchEngine:
     searchDictionary = {}
     inflect_engine = inflect.engine()
 
+    @staticmethod
+    def order_dictionary(dictionary):
+        return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+
     def add_to_dictionary(self, tags, data):
         for tag in tags:
-            plural_str = self.inflect_engine.plural(tag)
-            singular_str = self.inflect_engine.singular_noun(tag)
             if tag in self.searchDictionary:
                 self.searchDictionary[tag].add(data)
-                if plural_str != tag:
-                    self.searchDictionary[plural_str].add(data)
-                if singular_str != tag:
-                    self.searchDictionary[singular_str].add(data)
             else:
                 self.searchDictionary[tag] = {data}
-                if plural_str != tag:
-                    self.searchDictionary[plural_str] = {data}
-                if singular_str != tag:
-                    self.searchDictionary[singular_str] = {data}
 
     def search_keys(self, user_input):
         results = {}
-        if user_input[len(user_input) - 1] == '*':
-            results = self.create_results_set(results, True, user_input)
-        else:
-            results = self.create_results_set(results, False, user_input)
+        results = self.create_results_set(results, user_input)
         results = self.order_dictionary(results)
         if len(results) == 0:
             temp_str = input("Search returned zero results\nWhat were you searching for?\nType "
@@ -41,9 +34,63 @@ class SearchEngine:
                 return_str += (pair[0] + " - hits: " + str(pair[1]) + "\n")
             return return_str
 
-    @staticmethod
-    def order_dictionary(dictionary):
-        return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+    # TODO create function to make this more concise
+
+    def create_results_set(self, results_set, user_input):
+        exclude_from_results_set = {}
+        if user_input[len(user_input) - 1] == '*':
+            for key in self.searchDictionary.keys():
+                remove_flag = False
+                try:
+                    last_word = user_input[user_input.rindex(" ") + 1:len(user_input) - 1]
+                    if last_word[0] == '-':
+                        last_word = last_word[1:]
+                        remove_flag = True
+                    if key.startswith(last_word):
+                        if remove_flag:
+                            self.create_results_set_helper(exclude_from_results_set, key)
+                        else:
+                            self.create_results_set_helper(results_set, key)
+                except ValueError:
+                    last_word = user_input
+                    if last_word[0] == '-':
+                        remove_flag = True
+                        last_word = last_word[1:]
+                    if key.startswith(last_word):
+                        if remove_flag:
+                            self.create_results_set_helper(exclude_from_results_set, key)
+                        else:
+                            self.create_results_set_helper(results_set, key)
+            last_index_of_space = user_input.rfind(" ")
+            if last_index_of_space != -1:
+                user_input = user_input[0:last_index_of_space]
+        for key in user_input.split(" "):
+            remove_flag = False
+            word = key
+            if word[0] == '-':
+                remove_flag = True
+                word = word[1:]
+            if word in self.searchDictionary.keys():
+                if remove_flag:
+                    self.create_results_set_helper(exclude_from_results_set, word)
+                else:
+                    self.create_results_set_helper(results_set, word)
+            else:
+                plural_str = self.inflect_engine.plural(word)
+                singular_str = self.inflect_engine.singular_noun(word)
+                if plural_str != word and plural_str in self.searchDictionary.keys():
+                    if remove_flag:
+                        self.create_results_set_helper(exclude_from_results_set, plural_str)
+                    else:
+                        self.create_results_set_helper(results_set, plural_str)
+                elif singular_str != word and singular_str in self.searchDictionary.keys():
+                    if remove_flag:
+                        self.create_results_set_helper(exclude_from_results_set, singular_str)
+                    else:
+                        self.create_results_set_helper(results_set, singular_str)
+        print(str(dict(results_set.items() - exclude_from_results_set.items())) + " " + str(
+            exclude_from_results_set) + " " + str(results_set))
+        return dict(results_set.items() - exclude_from_results_set.items())
 
     def create_results_set_helper(self, results_set, key):
         for tag in self.searchDictionary[key]:
@@ -51,17 +98,6 @@ class SearchEngine:
                 results_set[tag] = results_set[tag] + 1
             else:
                 results_set[tag] = 1
-
-    def create_results_set(self, results_set, star_present, user_input):
-        if star_present:
-            for key in self.searchDictionary.keys():
-                if key.startswith(user_input[0:len(user_input) - 1], 0, -1):
-                    self.create_results_set_helper(results_set, key)
-        else:
-            for key in user_input.split(" "):
-                if key in self.searchDictionary.keys():
-                    self.create_results_set_helper(results_set, key)
-        return results_set
 
     def write_to_file(self, file_name):
         try:
