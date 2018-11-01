@@ -7,6 +7,9 @@ from Site import Site
 # TODO check variable names, some are bad
 # TODO add NOT/AND/OR
 # TODO add functionality to write on close
+# TODO add categories to sites - i.e. news/gaming/math etc - metadata of site should explain
+# TODO webcrawl
+
 class SearchEngine:
     """
     This class describes a search engine that uses a dictionary of tag : Site pairs
