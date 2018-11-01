@@ -11,12 +11,8 @@ from nltk.corpus import stopwords
 # TODO rename file
 
 
-# TODO check variable names, some are bad
-# TODO add NOT/AND/OR - Stack/Queue structure - notes in notebook
-# TODO add functionality to write on close - should be done
-# TODO add categories to sites - i.e. news/gaming/math etc - metadata of site should explain
-# TODO webcrawl
-
+# TODO webcrawl - in progress
+# TODO need to rework docstrings, they are outdated
 class SearchEngine:
     """
     This class describes a search engine that uses a dictionary of tag : Site pairs
@@ -27,20 +23,29 @@ class SearchEngine:
 
     # inflect is used for natural language processing, turns plurals into singulars and vice versa
 
-    def __init__(self, file_name="data_file.yaml"):  # TODO this is new, make sure it works
+    def __init__(self, file_name="data_file.yaml"):
         """
         This is the constructor for SearchEngine
         :param file_name: file name for input YAML file
         """
-        self.search_dictionary = {}
+        self.site_dictionary = dict()  # TODO this is needed for easy updating of references for search dictionary -
+        # TODO site dictionary will have key be site url and value be the site object, the search dictionary will have
+        # TODO the tag key and the site string value - corresponds to the site object in the site dictionary example
+        # TODO call: site_dictionary[search_dictionary[tag]].relevancy_dictionary[tag] should return the relevance for
+        # TODO that tag
+        self.search_dictionary = dict()
         self.file_name = file_name
         self.loaded = self.populate_from_file(self.file_name)
         atexit.register(self.write_to_file, self.file_name)
 
     @staticmethod
+    def search_ranking_algorithm(num):
+        return -abs(num - 3) + 3
+
+    @staticmethod
     def clean_string(user_string):
         """
-        This function cleans a string by removing whitespace and converting it to lowercase
+        This function cleans a string by removing whitespace and punctuation and converting it to lowercase
         :param user_string: string to clean
         :return: string.strip().lower()
         """
@@ -57,9 +62,7 @@ class SearchEngine:
         """
         return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
 
-    # TODO make tags clean (strip/lower)
-    # TODO need to add default so that input can be interpreted, need to allow for quoted tags
-    def add_to_dictionary(self, tags, data):
+    def add_to_search_dictionary(self, tags, data):
         """
         This functuon adds the tag : data pairing to the dictionary via a for-each loop that checks whether the
         tag (key) or its variants (plural/singular) is already in the dictionary
@@ -83,6 +86,7 @@ class SearchEngine:
                     else:
                         self.search_dictionary[word] = {data}
 
+    # TODO def add_to_site_dictionary(self):
     def search_keys(self, user_input):
         """
         This function checks the user input delimited by spaces against the class-level dictionary and returns the
@@ -98,7 +102,7 @@ class SearchEngine:
                 new_tag_str = input("Search returned zero results\nWhat were you searching for?\nType "
                                     "None if you don't want to add to the engine.\n")
                 if not new_tag_str.lower().strip() == "none":
-                    self.add_to_dictionary(user_input.strip().split(" "), new_tag_str)
+                    self.add_to_search_dictionary(user_input.strip().split(" "), new_tag_str)
             else:
                 return_str = ""
                 for pair in results:
@@ -109,7 +113,6 @@ class SearchEngine:
         else:
             return "Invalid input, please try again."
 
-    # TODO stacks/queues structure, recursion? Old assignment doesn't return anything, just adds string to stack
     @staticmethod
     def interpret_input(user_input):
         """
@@ -172,10 +175,7 @@ class SearchEngine:
         return postfix_string
 
         # TODO create function to make this more concise
-        # TODO make * operator per-word - done
         # TODO does this need to be so wordy? Look into libraries/use Site more - can be condensed
-        # TODO return some Sites based on categories, ask user for category of new Site - needs to be implemented still
-        # TODO quotes make many words one term - should be done, need to test tags
         # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
     def create_results_set(self, user_input):
@@ -250,28 +250,6 @@ class SearchEngine:
             dictionary_stack[0]) == 1 else {}  # TODO condense return
         # return difference between results_set and exclude_from_results_set based on keys and not key-value pairs
 
-        # TODO keep in mind, this might use more memory than a series of if-else statements in previous function. - irrelevant
-        # TODO Speed tests showed similar results, but memory test is TBD - irrelevant
-
-    #
-    # def send_to_helper(self, dictionary_stack, key, remove_flag):
-    #     """
-    #     This function calls create_results_set_helper based on if the key starts with - or not.
-    #     This is determined by remove_flag.
-    #     :param results_set: The results_set dictionary sent by create_results_set (and before that, search_keys)
-    #     :param exclude_from_results_set: The dictionary which is used to remove results from the results_set at the end
-    #     in the create_results_set function. Items are added if remove_flag is true.
-    #     :param key: Word to check against the class-level search_dictionary
-    #     :param remove_flag: Whether the key initially had the - operator before it. Determines which dictionary the
-    #     results are added to.
-    #     :return: None
-    #     """
-    #     if remove_flag:
-    #         self.create_results_set_helper(exclude_from_results_set, key, True)
-    #     else:
-    #         self.create_results_set_helper(results_set, key)
-
-    # TODO doesn't need to do hits for exclude_results_set - maybe add parameter remove_flag - done
     def create_results_set_helper(self, dictionary_stack, key, remove_flag=False):
         """
         Populates the dictionary with the number of hits.
@@ -283,7 +261,7 @@ class SearchEngine:
         dictionary_stack.append([{}, {}])
         if remove_flag:
             for tag in self.search_dictionary[key]:
-                if tag not in dictionary_stack[-1][1]:  # TODO maybe convert back to results_set?
+                if tag not in dictionary_stack[-1][1]:
                     dictionary_stack[-1][1][tag] = 1
         else:
             for tag in self.search_dictionary[key]:
