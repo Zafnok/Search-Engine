@@ -5,7 +5,12 @@ from collections import deque
 from requests.compat import urljoin
 from SearchEngineCopyCopy import SearchEngine
 from collections import Counter
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+# TODO may not need JS, the reason JavaScript is not enabled displays is because that is the first webpage - if don't
+# TODO need JS, then remove selenium stuff (may just remove whole Copy.py)
+# TODO maybe try running on Pi overnight
 """
 Author: Nicholas Wentz
 Description: This class describes a WebScraper which takes a url, finds all urls on the page, and scrapes each page for 
@@ -29,6 +34,11 @@ class WebScraper:
         self.url = "https://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/"
         self.site_dict = dict()
         self.site_queue = deque()
+        self.options = Options()
+        self.options.add_argument("--headless")  # no gui
+        self.options.add_argument("--disable-gpu")
+        self.driver = webdriver.Chrome("chromedriver.exe", chrome_options=self.options)
+        self.driver.implicitly_wait(20)
         self.soup = BeautifulSoup(requests.get(self.url).text,
                                   features="html.parser")  # TODO could probably change to build_queue function
 
@@ -45,7 +55,8 @@ class WebScraper:
         :return: None
         """
         for link in self.soup.find_all('a', href=True):  # if this doesn't work anymore, delete href=True
-            # if link.has_attr('href'):
+            # TODO add above line changes to main Scraper file
+            # if link.has_attr('href'): TODO should be good to remove
             other_url = urljoin(self.url, link['href'])
             if ((other_url not in self.site_dict and other_url not in self.site_queue) or (
                     other_url in self.site_dict and self.site_dict[other_url] > 86400)):
@@ -60,9 +71,14 @@ class WebScraper:
         """
         site = self.site_queue.popleft()
         print(site, self.search_engine.search_dictionary)
-        soup = BeautifulSoup(requests.get(site, headers={
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"}).text,
-                             features="html.parser")  # TODO we have detected that your browser is not javascript enabled
+        self.driver.get(site)
+        # print(self.driver.page_source)
+        soup = BeautifulSoup(self.driver.find_element_by_tag_name("html").get_attribute("innerHTML"),
+                             # TODO can remove all the get attribute stuff IF JS not needed
+                             features="html.parser")
+        # soup = BeautifulSoup(requests.get(site, headers={
+        #     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"}).text,
+        #                      features="html.parser")  # TODO we have detected that your browser is not javascript enabled
         site_relevancy_dictionary = dict()
         for meta in soup.find_all('meta'):
             if 'name' in meta.attrs:
