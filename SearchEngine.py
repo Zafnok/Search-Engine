@@ -1,5 +1,7 @@
 import operator
 import inflect
+import yaml
+from Site import Site
 
 
 # TODO check variable names, some are bad
@@ -33,8 +35,8 @@ class SearchEngine:
             else:
                 return_str = ""
                 for pair in results:
-                    return_str += (pair[0] + " - hits: " + str(pair[1]) + "\n")
-                return return_str
+                    return_str += (pair[0].get_site_name() + " - hits: " + str(pair[1]) + "\n")
+            return return_str
         else:
             return "Invalid input, please try again."
 
@@ -93,33 +95,34 @@ class SearchEngine:
     def write_to_file(self, file_name):
         try:
             with open(file_name, 'x+') as data_file:
-                self.write_helper(data_file)
+                yaml.dump(self.search_dictionary, data_file)
         except FileExistsError:
             with open(file_name, 'w') as data_file:
-                self.write_helper(data_file)
+                yaml.dump(self.search_dictionary, data_file)
 
     def write_helper(self, data_file):
         for key, value in self.search_dictionary.items():
             data_file.write(key + " ")
-            data_file.write(", ".join(value))
+            print(str(value))
+            data_file.write(str(value))
             data_file.write("\n")
 
     def populate_from_file(self, file_name):
         try:
             with open(file_name, 'r') as data_file:
-                for line in data_file:
-                    line = line.strip("\n")
-                    self.add_to_dictionary({line[0:line.index(" ")]}, line[line.index(" ") + 1:])
+                self.search_dictionary = yaml.load(data_file)
+            return True
         except FileNotFoundError:
             return False
 
 
 def main():
     search_engine = SearchEngine()
-    if not search_engine.populate_from_file('dataFile.txt'):
-        search_engine.add_to_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'}, 'ign gaming news')
-        search_engine.add_to_dictionary({'cars', 'ford', 'toyota', 'honda'}, 'carmax')
-        search_engine.add_to_dictionary({'jobs', 'careers', 'internships'}, 'indeed')
+    if not search_engine.populate_from_file('data_file.yaml'):
+        search_engine.add_to_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'cars', 'ps4'},
+                                        Site('ign gaming news', 'gaming'))
+        search_engine.add_to_dictionary({'cars', 'ford', 'toyota', 'honda'}, Site('carmax', 'cars'))
+        search_engine.add_to_dictionary({'jobs', 'careers', 'internships'}, Site('indeed', 'jobs'))
     exit_flag = False
     while not exit_flag:
         input_str = input("What would you like to search for?\nType exit to exit\n")
@@ -129,7 +132,7 @@ def main():
             output_str = search_engine.search_keys(input_str)
             if output_str is not None:
                 print(output_str)
-    search_engine.write_to_file("dataFile.txt")
+    search_engine.write_to_file("data_file.yaml")
 
 
 main()
