@@ -100,65 +100,73 @@ class SearchEngine:
         postfix_string = ""
         operator_stack = []
         open_parentheses = 0
-        open_quotes = False
-        quote_word = ""
-        word_check = False  # True when there is a word, if True then next word w/o operator in between has implied OR
+        # open_quotes = False
+        # quote_word = ""
+        word_check = 0  # 1 when there is a word, if >=2 then next word w/o operator in between has implied OR
         num_implied_or_to_add = 0  # counts number of ors for parentheses
-        print(list(
-            itertools.chain.from_iterable(
-                [outer_string.split() if outer_index % 2 == 0 else ["\"" + outer_string + "\""] for
-                 outer_index, outer_string in
-                 enumerate(
-                     [inner_string.strip() for inner_string in SearchEngine.clean_string(user_input).split("\"") if
-                      inner_string.strip() is not None and inner_string.strip() != ""])])))
-        # inner-most list comprehension splits based on quotes and filters to check if the strip returns an empty string
+        # print(list(itertools.chain.from_iterable(
+        #     [outer_string.split() if outer_index % 2 == 0 else ["\"" + outer_string + "\""] for
+        #      outer_index, outer_string in enumerate(
+        #         [inner_string.strip() for inner_string in SearchEngine.clean_string(user_input).split("\"")
+        #          ]) if
+        #      len(outer_string.strip()) > 0 and not outer_string.strip().isspace()])))
+        # inner-most list comprehension splits based on quotes
         # TODO maybe better way to check if string empty
         # next-level out list comprehension conditionally splits - if the index is even, it will split on spaces,
-        # other-wise (quoted strings) it will return a list of the one element, enclosed by quotes
+        # other-wise (quoted strings) it will return a list of the one element, enclosed by quotes - FILTER MOVED HERE:
+        # filters to check if the strip returns an empty string
         # final-level could have been done with comprehension but would be slower -
         # basically flattens the list of lists to make one single list
 
         # old for loop used SearchEngine.clean_string(user_input).split(" ")
-        for word in SearchEngine.clean_string(user_input).split(" "):
-            if word[0] == '(':
-                if len(operator_stack) == 0 and len(postfix_string) != 0:
-                    num_implied_or_to_add += 1
-                operator_stack.append(word[0])
-                open_parentheses += 1
-                word = word[1:]
-            if word[0] == '\"' and word[len(word) - 1] == '\"':
-                word = word.replace("\"", "")
-            if word[0] == '\"' or word[len(word) - 1] == '\"':
-                print(word)
-                if len(operator_stack) == 0 and len(postfix_string) != 0:
-                    num_implied_or_to_add += 1
-                open_quotes = not open_quotes
-                if not open_quotes:
-                    postfix_string += (quote_word.replace("\"", "") + word.replace("\"", "") + " ")
-                    quote_word = ""
-                else:
-                    quote_word += (word.replace("\"", "") + " ")
-            else:
-                if word[len(word) - 1] == ')':
-                    word = word[:word.index(')')]
-                    postfix_string += word + " "
-                    open_parentheses -= 1
-                    while operator_stack[-1] != '(':
-                        postfix_string += operator_stack.pop() + " "
-                    operator_stack.pop()
-                elif word == "and" or word == "or":
-                    if open_parentheses == 0 and len(operator_stack) > 0:
-                        postfix_string += operator_stack.pop() + " "
-                    operator_stack.append(word)
-                    word_check = False  # TODO don't know where else needed
-                else:
-                    if open_quotes:
-                        quote_word += (word + " ")
+        for word in list(itertools.chain.from_iterable(
+                [outer_string.split() if outer_index % 2 == 0 else ["\"" + outer_string + "\""] for
+                 outer_index, outer_string in enumerate(
+                    [inner_string.strip() for inner_string in SearchEngine.clean_string(user_input).split("\"")
+                     ]) if len(outer_string.strip()) > 0 and not outer_string.strip().isspace()])):
+            if word[0] != "\"":
+                if word[0] == '(':
+                    if len(operator_stack) == 0 and len(postfix_string) != 0:
+                        num_implied_or_to_add += 1
+                    operator_stack.append(word[0])
+                    open_parentheses += 1
+                    word = word[1:]
+                # if word[0] == '\"' and word[len(word) - 1] == '\"':
+                #     word = word.replace("\"", "")
+                # if word[0] == '\"' or word[len(word) - 1] == '\"':
+                #     print(word)
+                #     if len(operator_stack) == 0 and len(postfix_string) != 0:
+                #         num_implied_or_to_add += 1
+                #     open_quotes = not open_quotes
+                #     if not open_quotes:
+                #         postfix_string += (quote_word.replace("\"", "") + word.replace("\"", "") + " ")
+                #         quote_word = ""
+                #     else:
+                #         quote_word += (word.replace("\"", "") + " ")
+                if len(word) > 0:
+                    if word[len(word) - 1] == ')':
+                        word = word[:word.index(')')]
+                        if len(word) > 0:
+                            postfix_string += word + " "
+                        open_parentheses -= 1
+                        while operator_stack[-1] != '(':
+                            postfix_string += operator_stack.pop() + " "
+                        operator_stack.pop()
+                    elif word == "and" or word == "or":
+                        if open_parentheses == 0 and len(operator_stack) > 0:
+                            postfix_string += operator_stack.pop() + " "
+                        operator_stack.append(word)
+                        word_check = 0  # TODO don't know where else needed
                     else:
                         postfix_string += word + " "
-                        if word_check:
+                        word_check += 1
+                        if word_check >= 2:
                             postfix_string += "or "
-                        word_check = not word_check
+            else:
+                postfix_string += word + " "
+                word_check += 1
+                if word_check >= 2:
+                    postfix_string += "or "
         while num_implied_or_to_add != 0:
             operator_stack.append("or")
             num_implied_or_to_add -= 1
