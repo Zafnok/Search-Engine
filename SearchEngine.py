@@ -138,7 +138,7 @@ class SearchEngine:
             while word[0] == '(':
                 operator_stack.append(word[0])
                 word = word[word.index('(') + 1:]
-            if word[len(word) - 1] == ')':
+            if word[-1] == ')':
                 word = word[:word.index(')')]
                 postfix_string += word + " "
                 has_added_word = True
@@ -181,16 +181,16 @@ class SearchEngine:
         dictionary_stack = []  # TODO better name
         for word in self.clean_string(user_input).split(" "):
             if word == "or" or word == "and":  # TODO do we need 2 dicts for exclude/normal for each pop? - set?
-                dict_one_tuple = dictionary_stack.pop()  # TODO convert tuple to set probably
-                dict_two_tuple = dictionary_stack.pop()
+                dict_one_list = dictionary_stack.pop()  # TODO convert tuple to set probably
+                dict_two_list = dictionary_stack.pop()
                 if word == "and":
-                    dictionary_stack.append(({key: dict_one_tuple[0][key] for key in dict_one_tuple[0] if
-                                              key in dict_two_tuple[0]},
-                                             {key: dict_one_tuple[1][key] for key in dict_one_tuple[1] if
-                                              key in dict_two_tuple[1]}))
+                    dictionary_stack.append([{key: dict_one_list[0][key] for key in dict_one_list[0] if
+                                              key in dict_two_list[0]},
+                                             {key: dict_one_list[1][key] for key in dict_one_list[1] if
+                                              key in dict_two_list[1]}])
                 else:
-                    dictionary_stack.append((Counter(dict_one_tuple[0]) + Counter(dict_two_tuple[0]),
-                                             (Counter(dict_one_tuple[1]) + Counter(dict_two_tuple[1]))))
+                    dictionary_stack.append([dict(Counter(dict_one_list[0]) + Counter(dict_two_list[0])),
+                                             dict(Counter(dict_one_list[1]) + Counter(dict_two_list[1]))])
             else:
                 remove_flag = False
                 if remove_flag_single_char:
@@ -202,11 +202,21 @@ class SearchEngine:
                     if len(word) == 0:
                         remove_flag_single_char = True
                 if not remove_flag_single_char:
-                    if word[len(word) - 1] == '*':
-                        word = word[0:len(word) - 1]
+                    if word[-1] == '*':  # TODO change len to -1
+                        # TODO this creates several lists of dicts in stack
+                        word = word[0:-1]
+                        counter = 0
                         for key in self.search_dictionary.keys():
                             if key.startswith(word):
                                 self.create_results_set_helper(dictionary_stack, key, remove_flag)
+                                counter += 1
+                                if counter >= 2:
+                                    dict_one_list = dictionary_stack.pop()
+                                    dict_two_list = dictionary_stack.pop()
+                                    dictionary_stack.append(
+                                        [dict(Counter(dict_one_list[0]) + Counter(dict_two_list[0])),
+                                         dict(Counter(dict_one_list[1]) + Counter(dict_two_list[1]))])
+
                     else:
                         if word in self.search_dictionary.keys():
                             self.create_results_set_helper(dictionary_stack, word, remove_flag)
