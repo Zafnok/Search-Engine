@@ -8,7 +8,7 @@ import atexit
 
 
 # TODO check variable names, some are bad
-# TODO add NOT/AND/OR
+# TODO add NOT/AND/OR - Stack/Queue structure
 # TODO add functionality to write on close
 # TODO add categories to sites - i.e. news/gaming/math etc - metadata of site should explain
 # TODO webcrawl
@@ -166,6 +166,7 @@ class SearchEngine:
             else:
                 results_set[tag] = 1
 
+    # TODO make this compatible with any stream so it can be used for server
     def write_to_file(self, file_name):
         """
         Writes the search_dictionary to a YAML file.
@@ -179,6 +180,7 @@ class SearchEngine:
             with open(file_name, 'w') as data_file:
                 yaml.dump(self.search_dictionary, data_file)
 
+    # TODO make this compatible with any stream so it can be used for server
     def populate_from_file(self, file_name):
         """
         Populates the class-level search_dictionary from a YAML file.
