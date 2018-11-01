@@ -24,10 +24,10 @@ class SearchEngine:
         results = self.create_results_set(results, user_input)
         results = self.order_dictionary(results)
         if len(results) == 0:
-            temp_str = input("Search returned zero results\nWhat were you searching for?\nType "
-                             "None if you don't want to add to the engine.\n")
-            if not temp_str.lower().strip() == "none":
-                self.add_to_dictionary(user_input.strip().split(" "), temp_str)
+            new_tag_str = input("Search returned zero results\nWhat were you searching for?\nType "
+                                "None if you don't want to add to the engine.\n")
+            if not new_tag_str.lower().strip() == "none":
+                self.add_to_dictionary(user_input.strip().split(" "), new_tag_str)
         else:
             return_str = ""
             for pair in results:
@@ -39,28 +39,20 @@ class SearchEngine:
     def create_results_set(self, results_set, user_input):
         exclude_from_results_set = {}
         if user_input[len(user_input) - 1] == '*':
+            remove_flag = False
+            try:
+                last_word = user_input[user_input.rindex(" ") + 1:len(user_input) - 1]
+                if last_word[0] == '-':
+                    last_word = last_word[1:]
+                    remove_flag = True
+            except ValueError:
+                last_word = user_input[0:len(user_input)-1]
+                if last_word[0] == '-':
+                    remove_flag = True
+                    last_word = last_word[1:]
             for key in self.searchDictionary.keys():
-                remove_flag = False
-                try:
-                    last_word = user_input[user_input.rindex(" ") + 1:len(user_input) - 1]
-                    if last_word[0] == '-':
-                        last_word = last_word[1:]
-                        remove_flag = True
-                    if key.startswith(last_word):
-                        if remove_flag:
-                            self.create_results_set_helper(exclude_from_results_set, key)
-                        else:
-                            self.create_results_set_helper(results_set, key)
-                except ValueError:
-                    last_word = user_input
-                    if last_word[0] == '-':
-                        remove_flag = True
-                        last_word = last_word[1:]
-                    if key.startswith(last_word):
-                        if remove_flag:
-                            self.create_results_set_helper(exclude_from_results_set, key)
-                        else:
-                            self.create_results_set_helper(results_set, key)
+                if key.startswith(last_word):
+                    self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
             last_index_of_space = user_input.rfind(" ")
             if last_index_of_space != -1:
                 user_input = user_input[0:last_index_of_space]
@@ -71,26 +63,21 @@ class SearchEngine:
                 remove_flag = True
                 word = word[1:]
             if word in self.searchDictionary.keys():
-                if remove_flag:
-                    self.create_results_set_helper(exclude_from_results_set, word)
-                else:
-                    self.create_results_set_helper(results_set, word)
+                self.send_to_helper(results_set, exclude_from_results_set, key, remove_flag)
             else:
                 plural_str = self.inflect_engine.plural(word)
                 singular_str = self.inflect_engine.singular_noun(word)
                 if plural_str != word and plural_str in self.searchDictionary.keys():
-                    if remove_flag:
-                        self.create_results_set_helper(exclude_from_results_set, plural_str)
-                    else:
-                        self.create_results_set_helper(results_set, plural_str)
+                    self.send_to_helper(results_set, exclude_from_results_set, plural_str, remove_flag)
                 elif singular_str != word and singular_str in self.searchDictionary.keys():
-                    if remove_flag:
-                        self.create_results_set_helper(exclude_from_results_set, singular_str)
-                    else:
-                        self.create_results_set_helper(results_set, singular_str)
-        print(str(dict(results_set.items() - exclude_from_results_set.items())) + " " + str(
-            exclude_from_results_set) + " " + str(results_set))
+                    self.send_to_helper(results_set, exclude_from_results_set, singular_str, remove_flag)
         return dict(results_set.items() - exclude_from_results_set.items())
+
+    def send_to_helper(self, results_set, exclude_from_results_set, key, remove_flag):
+        if remove_flag:
+            self.create_results_set_helper(exclude_from_results_set, key)
+        else:
+            self.create_results_set_helper(results_set, key)
 
     def create_results_set_helper(self, results_set, key):
         for tag in self.searchDictionary[key]:
