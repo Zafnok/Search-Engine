@@ -1,18 +1,20 @@
 import operator
-import inflect
-import yaml
-import atexit
-from collections import Counter
+import inflect  # natural language processing
+import yaml  # YAML file functionality
+import atexit  # for exit functions
+from collections import Counter  # dictionary-like object
 import itertools
-import re
-from nltk.corpus import stopwords
+import re  # regex
+from nltk.corpus import stopwords  # stopwords are common english words
 
 
-# TODO rename file
-
+# TODO need to add a ranking system for if sites have many words in common - such as if one description has 3 australia,
+# TODO rank higher than 1 (initial algorithm - (-abs(x-3)+3) for description, then make content ranked lower
+# TODO need to make a memory management function so that it can be used on Pi
 
 # TODO webcrawl - in progress
-# TODO need to rework docstrings, they are outdated
+# TODO need to rework docstrings, they are outdated!!! important
+# TODO some functions reliant on certain type - add_to_search_dictionary, create_results_set_helper
 class SearchEngine:
     """
     This class describes a search engine that uses a dictionary of tag : Site pairs
@@ -23,10 +25,12 @@ class SearchEngine:
 
     # inflect is used for natural language processing, turns plurals into singulars and vice versa
 
-    def __init__(self, file_name="data_file.yaml"):
+    def __init__(self, search_dictionary_file_name="search_dictionary_data_file.yaml",
+                 site_dictionary_file_name="site_dictionary_data_file.yaml"):
         """
         This is the constructor for SearchEngine
-        :param file_name: file name for input YAML file
+        :param search_dictionary_file_name: file path string for the search dictionary YAML file
+        :param site_dictionary_file_name: file path string for the site dictionary YAML file
         """
         self.site_dictionary = dict()  # TODO this is needed for easy updating of references for search dictionary -
         # TODO site dictionary will have key be site url and value be the site object, the search dictionary will have
@@ -34,12 +38,20 @@ class SearchEngine:
         # TODO call: site_dictionary[search_dictionary[tag]].relevancy_dictionary[tag] should return the relevance for
         # TODO that tag
         self.search_dictionary = dict()
-        self.file_name = file_name
-        self.loaded = self.populate_from_file(self.file_name)
-        atexit.register(self.write_to_file, self.file_name)
+        self.search_dictionary_file_name = search_dictionary_file_name
+        self.site_dictionary_file_name = site_dictionary_file_name
+        self.loaded = self.populate_from_file(self.search_dictionary_file_name,
+                                              self.site_dictionary_file_name)  # not sure if needed anymore,
+        # if not then make it so populate doesn't return
+        atexit.register(self.write_to_file, self.search_dictionary_file_name, self.site_dictionary_file_name)
 
     @staticmethod
     def search_ranking_algorithm(num):
+        """
+        Takes a number and returns the number altered using the algorithm
+        :param num: number to convert using algorithm
+        :return: the converted number
+        """
         return -abs(num - 3) + 3
 
     @staticmethod
@@ -47,7 +59,7 @@ class SearchEngine:
         """
         This function cleans a string by removing whitespace and punctuation and converting it to lowercase
         :param user_string: string to clean
-        :return: string.strip().lower()
+        :return: string.strip().lower() - also removes punctuation
         """
         return re.sub("[,:!?]", "", user_string.strip().lower().strip('.'))
         # return user_string.strip().lower().translate()(maketrans(string.punctuation)
@@ -55,19 +67,20 @@ class SearchEngine:
     @staticmethod
     def order_dictionary(dictionary):
         """
-        This function orders the dictionary's hit results by using the operator's sorted function.
-        The reverse=True is due to the dictionary's hit results being ordered 1,2,3 rather than 3,2,1
-        :param dictionary: search result's dictionary to sort by hits
+        This function orders the dictionary's relevancy results by using the operator's sorted function.
+        The reverse=True is due to the dictionary's relevancy results being ordered 1,2,3 rather than 3,2,1
+        :param dictionary: search result's dictionary to sort by relevancy
         :return: the sorted dictionary
         """
         return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
 
-    def add_to_search_dictionary(self, tags, data):
+    def add_to_search_dictionary(self, tags, site):
         """
-        This functuon adds the tag : data pairing to the dictionary via a for-each loop that checks whether the
-        tag (key) or its variants (plural/singular) is already in the dictionary
+        This function adds the tag : data pairing to the dictionary via a for-each loop that checks whether the
+        tag (key) or its variants (plural/singular) is already in the dictionary. The function also adds the
+        site url: Site pairing to the site dictionary
         :param tags: set of tags that are associated with the data
-        :param data: Site to add to the value for each of the tags
+        :param site: Site to add to the value for each of the tags
         :return: None
         """
         tags = set([word for word in tags if word not in stopwords.words('english')])
@@ -75,18 +88,20 @@ class SearchEngine:
             word = self.clean_string(tag)
             if word not in set(stopwords.words('english')):  # common words from nltk
                 if word in self.search_dictionary:
-                    self.search_dictionary[word].add(data)
+                    self.search_dictionary[word].add(str(site))
                 else:
                     plural_str = self.__inflect_engine.plural(word)
                     singular_str = self.__inflect_engine.singular_noun(word)
                     if plural_str in self.search_dictionary:
-                        self.search_dictionary[plural_str].add(data)
+                        self.search_dictionary[plural_str].add(str(site))
                     elif singular_str in self.search_dictionary:
-                        self.search_dictionary[singular_str].add(data)
+                        self.search_dictionary[singular_str].add(str(site))
                     else:
-                        self.search_dictionary[word] = {data}
+                        self.search_dictionary[word] = {str(site)}
+        self.site_dictionary[str(site)] = site
 
-    # TODO def add_to_site_dictionary(self):
+    # TODO don't know if the Sites will work with search function anymore, will have to test after
+    # TODO running the scraper for a while
     def search_keys(self, user_input):
         """
         This function checks the user input delimited by spaces against the class-level dictionary and returns the
@@ -113,6 +128,7 @@ class SearchEngine:
         else:
             return "Invalid input, please try again."
 
+    # this function is labyrinthine and should not be altered unless rebuilding wholly
     @staticmethod
     def interpret_input(user_input):
         """
@@ -178,6 +194,7 @@ class SearchEngine:
         # TODO does this need to be so wordy? Look into libraries/use Site more - can be condensed
         # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
+    # this function is labyrinthine and should not be altered unless rebuilt wholly
     def create_results_set(self, user_input):
         """
         This function is called by search_keys and creates the actual results set used by search_keys to make the
@@ -264,37 +281,50 @@ class SearchEngine:
                 if tag not in dictionary_stack[-1][1]:
                     dictionary_stack[-1][1][tag] = 1
         else:
-            for tag in self.search_dictionary[key]:
-                if tag in dictionary_stack[-1][0]:
-                    dictionary_stack[-1][0][tag] = \
-                        dictionary_stack[-1][0][tag] + 1
+            for site in self.search_dictionary[key]:
+                if site in dictionary_stack[-1][0]:
+                    dictionary_stack[-1][0][site] = \
+                        dictionary_stack[-1][0][site] + self.site_dictionary[site].relevancy_dictionary[key]
                 else:
-                    dictionary_stack[-1][0][tag] = 1
+                    dictionary_stack[-1][0][site] = self.site_dictionary[site].relevancy_dictionary[key]
 
     # TODO make this compatible with any stream so it can be used for server
-    def write_to_file(self, file_name):
+    def write_to_file(self, search_dictionary_file_name, site_dictionary_file_name):
         """
-        Writes the search_dictionary to a YAML file.
-        :param file_name: file name for the YAML file.
+        Writes the search_dictionary and site dictionary to their respective YAML files.
+        :param search_dictionary_file_name: file string path for the search dictionary's YAML file.
+        :param site_dictionary_file_name: file string path for the site dictionary's YAML file
         :return: None
         """
         try:
-            with open(file_name, 'x+') as data_file:
+            with open(search_dictionary_file_name, 'x+') as data_file:
                 yaml.dump(self.search_dictionary, data_file)
         except FileExistsError:
-            with open(file_name, 'w') as data_file:
+            with open(search_dictionary_file_name, 'w') as data_file:
                 yaml.dump(self.search_dictionary, data_file)
+        try:
+            with open(site_dictionary_file_name, 'x+') as data_file:
+                yaml.dump(self.site_dictionary, data_file)
+        except FileExistsError:
+            with open(site_dictionary_file_name, 'w') as data_file:
+                yaml.dump(self.site_dictionary, data_file)
 
     # TODO make this compatible with any stream so it can be used for server - python open makes stream?
-    def populate_from_file(self, file_name):
+    # TODO might not need to return anything, since loaded isn't used right now
+    def populate_from_file(self, search_dictionary_file_name, site_dictionary_file_name):
         """
-        Populates the class-level search_dictionary from a YAML file.
-        :param file_name: file name for the YAML file.
-        :return: Whether the file exists and loaded or not - True or False.
+        Populates the class-level search_dictionary and site dictionary from a YAML file.
+        :param search_dictionary_file_name: file string path for the search dictionary's YAML file.
+        :param site_dictionary_file_name: file string path for the site dictionary's YAML file.
+        :return: Whether the files exist and loaded or not - True or False. - TODO this might change
         """
         try:
-            with open(file_name, 'r') as data_file:
+            with open(search_dictionary_file_name, 'r') as data_file:
                 self.search_dictionary = yaml.load(data_file)
-            return True
+        except FileNotFoundError:
+            return False
+        try:
+            with open(site_dictionary_file_name, 'r') as data_file:
+                self.site_dictionary = yaml.load(data_file)
         except FileNotFoundError:
             return False

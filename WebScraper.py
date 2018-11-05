@@ -3,8 +3,11 @@ from bs4 import BeautifulSoup
 from bs4.element import Comment
 from collections import deque
 from requests.compat import urljoin
-from SearchEngineCopyCopy import SearchEngine
+from SearchEngine import SearchEngine
 from collections import Counter
+from Site import Site
+import yaml
+import atexit
 
 """
 Author: Nicholas Wentz
@@ -19,16 +22,21 @@ descriptions, then adds the descriptions' words and sites to the search engine
 # TODO maybe add url as param for init
 
 class WebScraper:
-    def __init__(self):
+    def __init__(self, file_name="web_scraper_data_file.yaml"):
         """
         The constructor sets up the SearchEngine to add tags and sites to, as well as the initial url, site_dict which
         holds the sites already visited - mapped to the time since last visit, as well as the site_queue which holds the
         urls to scrape in a queue, and the BeautifulSoup object for build_queue
+        :param file_name: file string path for storing the queue in a YAML file.
         """
         self.search_engine = SearchEngine()
         self.url = "https://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/"
         self.site_dict = dict()
         self.site_queue = deque()
+        self.loaded = self.populate_from_file(file_name)  # might not need loaded - if not then get rid of return
+        if self.loaded and len(self.site_queue) > 1:
+            self.url = self.site_queue.popleft()
+        atexit.register(self.write_to_file, file_name)
         self.soup = BeautifulSoup(requests.get(self.url).text,
                                   features="html.parser")  # TODO could probably change to build_queue function
 
@@ -45,7 +53,8 @@ class WebScraper:
         :return: None
         """
         for link in self.soup.find_all('a', href=True):  # if this doesn't work anymore, delete href=True
-            # if link.has_attr('href'):
+            # TODO add above line changes to main Scraper file
+            # if link.has_attr('href'): TODO should be good to remove
             other_url = urljoin(self.url, link['href'])
             if ((other_url not in self.site_dict and other_url not in self.site_queue) or (
                     other_url in self.site_dict and self.site_dict[other_url] > 86400)):
@@ -60,9 +69,7 @@ class WebScraper:
         """
         site = self.site_queue.popleft()
         print(site, self.search_engine.search_dictionary)
-        soup = BeautifulSoup(requests.get(site, headers={
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"}).text,
-                             features="html.parser")  # TODO we have detected that your browser is not javascript enabled
+        soup = BeautifulSoup(requests.get(site).text, features="html.parser")
         site_relevancy_dictionary = dict()
         for meta in soup.find_all('meta'):
             if 'name' in meta.attrs:
@@ -86,14 +93,44 @@ class WebScraper:
                             site_relevancy_dictionary[key] += self.search_engine.search_ranking_algorithm(value)
                         else:
                             site_relevancy_dictionary[key] = self.search_engine.search_ranking_algorithm(value)
+        for key in site_relevancy_dictionary.keys():
+            site_relevancy_dictionary[key] = pow(site_relevancy_dictionary[key], 2)
         texts = soup.findAll(text=True)
         visible_texts = filter(self.visible, texts)
-        print(u" ".join(self.search_engine.clean_string(text) for text in
-                        visible_texts))  # u is for unicode
-        # self.search_engine.site_dictionary(site, Site())
-        # self.search_engine.add_to_search_dictionary(meta.attrs['content'].split(), site)
-        # self.site_dict[site] = time
+        count = Counter([self.search_engine.clean_string(word) for word in
+                         (u" ".join(self.search_engine.clean_string(text) for text in
+                                    visible_texts).split())])
+        count = {key: value for key, value in count.items() if not (len(key) == 0 or key.isspace())}
+        for key, value in count.items():
+            if key in site_relevancy_dictionary:
+                site_relevancy_dictionary[key] += self.search_engine.search_ranking_algorithm(value)
+            else:
+                site_relevancy_dictionary[key] = self.search_engine.search_ranking_algorithm(value)
+        new_site = Site(site_name=site, relevancy_dictionary=site_relevancy_dictionary)
+        self.search_engine.add_to_search_dictionary(site_relevancy_dictionary.keys(), new_site)
 
-        # TODO look at title, desc, keywords, content, etc use NTLK?
-        # while len(site_queue) > 0:
-        # print[meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'description' ]
+    def write_to_file(self, file_name):
+        """
+        This function writes the site queue to the specified file path
+        :param file_name: file string path for YAML file to write site queue to
+        :return: None
+        """
+        try:
+            with open(file_name, 'x+') as data_file:
+                yaml.dump(self.site_queue, data_file)
+        except FileExistsError:
+            with open(file_name, 'w') as data_file:
+                yaml.dump(self.site_queue, data_file)
+
+    def populate_from_file(self, file_name):
+        """
+        This function reads a YAML file and assigns the site queue to the queue represented in the file
+        :param file_name: file string path for YAML file to read site queue from
+        :return: True or False based on whether the file loaded correctly
+        """
+        try:
+            with open(file_name, 'r') as data_file:
+                self.site_queue = yaml.load(data_file)
+            return True
+        except FileNotFoundError:
+            return False
