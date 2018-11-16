@@ -4,6 +4,7 @@ import NoSQLdb
 from collections import Counter
 import itertools
 import re
+import regex
 
 # TODO rename file
 
@@ -29,7 +30,7 @@ def search_ranking_algorithm(num):
     :param num: number to convert using algorithm
     :return: number converted using algorithm
     """
-    return -abs(num - 3) + 3
+    return -abs(num - 10) + 10
 
 
 def clean_string(user_string):
@@ -38,7 +39,7 @@ def clean_string(user_string):
     :param user_string: string to clean
     :return: string.strip().lower()
     """
-    return re.sub("[,:!?]", "", user_string.strip().lower().strip('.'))
+    return regex.sub(r"(?V1)[^\w--\".]", "", user_string.lower().strip('.'), regex.UNICODE)
     # return user_string.strip().lower().translate()(maketrans(string.punctuation)
 
 
@@ -98,7 +99,7 @@ def interpret_input(user_input):
     ls = list(itertools.chain.from_iterable(
         [outer_string.split() if outer_index % 2 == 0 else ["\"" + outer_string + "\""] for
          outer_index, outer_string in enumerate(
-            [inner_string.strip() for inner_string in SearchEngine.clean_string(user_input).split("\"")
+            [inner_string.strip() for inner_string in clean_string(user_input).split("\"")
              ]) if len(outer_string.strip()) > 0 and not outer_string.strip().isspace()]))
     i = 0
     while i < len(ls):

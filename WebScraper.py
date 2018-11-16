@@ -17,6 +17,7 @@ descriptions, then adds the descriptions' words and sites to the search engine
 """
 
 
+# TODO add robots.txt stuff
 # TODO rename file
 # TODO add functionality to pick up where left off - maybe write the queue to a file
 # TODO need to scrape each subsite - think done
@@ -29,7 +30,7 @@ class WebScraper:
         holds the sites already visited - mapped to the time since last visit, as well as the site_queue which holds the
         urls to scrape in a queue, and the BeautifulSoup object for build_queue
         """
-        self.url = "https://www.virginaustralia.com/au/en/bookings/flights/make-a-booking/"
+        self.url = "https://en.wikipedia.org/wiki/Philosophy"
         self.site_dict = dict()
         self.site_queue = deque()
         self.file_name = file_name
@@ -43,8 +44,8 @@ class WebScraper:
         :param element: Element to check whether visible or not
         :return: Whether the element is in the visible elements
         """
-        if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]'] or isinstance(element,
-                                                                                                           Comment):
+        if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]'] \
+                or isinstance(element, Comment):
             return False
         return True
 
@@ -57,8 +58,9 @@ class WebScraper:
 
         for link in BeautifulSoup(requests.get(url).text, features="html.parser").find_all('a', href=True):
             other_url = urljoin(url, link['href'])
-            if ((other_url not in self.site_dict and other_url not in self.site_queue) or (
-                    other_url in self.site_dict and self.site_dict[other_url] > 86400)):
+            if ((other_url not in self.site_dict or (other_url in self.site_dict and
+                                                     self.site_dict[other_url] > 86400))
+                    and other_url not in self.site_queue):
                 self.site_dict[other_url] = time.time()
                 self.site_queue.append(other_url)
 

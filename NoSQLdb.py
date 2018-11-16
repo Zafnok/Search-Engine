@@ -42,7 +42,6 @@ def store_multiple_kv_search_db(keys, value):
             if exists_in_search_db(key):
                 store_kv_search_db(key, value)
             else:
-
                 plural_str = SearchEngine.inflect_engine.plural(key)
                 singular_str = SearchEngine.inflect_engine.singular_noun(key)
                 if exists_in_search_db(plural_str):
