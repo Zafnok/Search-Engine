@@ -1,14 +1,14 @@
-from SearchEngineCopyCopy import SearchEngine
+from SearchEngine import SearchEngine
 from Site import Site
 # import time
 
 if __name__ == "__main__":
     search_engine = SearchEngine()
     if not search_engine.loaded:
-        search_engine.add_to_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'},
-                                        Site('ign gaming news', 'gaming'))
-        search_engine.add_to_dictionary({'cars', 'ford', 'toyota', 'honda'}, Site('carmax', 'cars'))
-        search_engine.add_to_dictionary({'jobs', 'careers', 'internships'}, Site('indeed', 'jobs'))
+        search_engine.add_to_search_dictionary({'gaming', 'news', 'media', 'ign', 'games', 'ps4'},
+                                               Site('ign gaming news', 'gaming'))
+        search_engine.add_to_search_dictionary({'cars', 'ford', 'toyota', 'honda'}, Site('carmax', 'cars'))
+        search_engine.add_to_search_dictionary({'jobs', 'careers', 'internships'}, Site('indeed', 'jobs'))
     exit_flag = False
     while not exit_flag:
         input_str = input("What would you like to search for?\nType exit to exit\n")

@@ -7,7 +7,7 @@ class Site:
         """
         Constructor for Site.
         :param site_name: Name of site.
-        :param site_category: Category string.
+        :param relevancy_dictionary: Dictionary holding tags and their assigned relevancy values
         """
         self.site_name = site_name
         self.relevancy_dictionary = relevancy_dictionary if relevancy_dictionary is not None else dict()
@@ -27,6 +27,7 @@ class Site:
         """
         return self.get_site_name()
 
+    # TODO fix this or remove
     def __repr__(self):
         """
         :return: get_site_name: get_category

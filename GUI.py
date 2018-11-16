@@ -3,11 +3,12 @@ from PyQt5.QtWidgets import QPushButton, QMainWindow, QApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import time
-from WebScraperTest import WebScraper
+from WebScraper import WebScraper
 
 
 # TODO change console output to GUI display
-# TODO run via terminal/console rather than pycharm, pycharm is mem intensive
+# TODO run via terminal/console rather than pycharm, pycharm is mem intensive - turn into RPi program,
+# TODO allow network interrupt
 # made by https://www.reddit.com/r/learnpython/comments/6ohxfg/using_pyqt4_for_a_button_to_kick_off_a_loop/
 
 class Worker(QObject):
@@ -17,7 +18,7 @@ class Worker(QObject):
         super(Worker, self).__init__()  # the param QObject is counted as a parent class
         self.working = True  # this is our flag to control our loop
         self.scraper = WebScraper()
-        self.scraper.build_queue()
+        self.scraper.build_queue(self.scraper.url)
 
     def work(self):
         while self.working and len(self.scraper.site_queue) > 0:
