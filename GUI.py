@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QPushButton, QMainWindow, QApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import time
-from WebScraper import WebScraper
+import WebScraper
 
 
 # TODO change console output to GUI display
@@ -17,13 +17,12 @@ class Worker(QObject):
     def __init__(self):
         super(Worker, self).__init__()  # the param QObject is counted as a parent class
         self.working = True  # this is our flag to control our loop
-        self.scraper = WebScraper()
-        self.scraper.build_queue(self.scraper.url)
 
     def work(self):
-        while self.working and len(self.scraper.site_queue) > 0:
+        while self.working:
             # TODO other part of web scraper
-            self.scraper.scrape()
+            print(int(QThread.currentThreadId()))
+            WebScraper.scrape()
             time.sleep(1)  # pauses thread
 
         self.finished.emit()  # alert our gui that the loop stopped
@@ -50,6 +49,7 @@ class Window(QMainWindow):
 
     def start_loop(self):
         self.thread = QThread()  # a new thread to run our background tasks in
+        print("start", int(QThread.currentThreadId()))
         self.worker = Worker()  # a new worker to perform those tasks
         self.worker.moveToThread(
             self.thread)  # move the worker into the thread, do this first before connecting the signals
