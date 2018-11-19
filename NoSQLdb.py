@@ -91,8 +91,8 @@ def retrieve_kv_search_db(key):
     :param key: key to return value from searchdb for
     :return: list of site strings for key in searchdb
     """
-    return ast.literal_eval(
-        search_dictionary_db[key].decode())  # if key in NoSQLdb.search_dictionary_db.keys() else False
+    return ast.literal_eval(search_dictionary_db[key].decode())
+    # if key in NoSQLdb.search_dictionary_db.keys() else False
 
 
 def retrieve_kv_site_db_dictionary(key):
@@ -116,21 +116,22 @@ def retrieve_kv_site_db_time(key):
 #
 #     return queue_dictionary_db.pop(next(iter(queue_dictionary_db), default=None))
 #
-
+# TODO this takes a long time when retrieving into memory
 def get_all_search_db_data():
     """
     This function returns the full dictionary for keys and their values from searchdb
     :return: the full data for searchdb
     """
-    return {key: value for (key, value) in search_dictionary_db.items()}
+    return {key: ast.literal_eval(value.decode()) for (key, value) in search_dictionary_db.items()}
 
 
+# TODO this takes a long time when retrieving into memory
 def get_all_site_db_data():
     """
     This function returns the full dictionary for keys and their values from sitedb
     :return: the full data for sitedb
     """
-    return {key: value for (key, value) in site_dictionary_db.items()}
+    return {key: ast.literal_eval(value.decode()) for (key, value) in site_dictionary_db.items()}
 
 
 def get_search_db_keys():

@@ -5,7 +5,8 @@ from collections import Counter
 import itertools
 import re
 import regex
-import time
+
+# import time
 
 # TODO rename file
 
@@ -20,6 +21,8 @@ The dictionary's values are sets of Sites and the keys are string tags
 """
 
 inflect_engine = inflect.engine()
+site_dict = {k: v[1] for k, v in NoSQLdb.get_all_site_db_data().items()}
+search_dict = NoSQLdb.get_all_search_db_data()
 
 
 # inflect is used for natural language processing, turns plurals into singulars and vice versa
@@ -187,7 +190,7 @@ def create_results_set(user_input):
                     # TODO this creates several lists of dicts in stack
                     word = word[0:-1]
                     counter = 0
-                    for key in NoSQLdb.get_search_db_keys():
+                    for key in search_dict:
                         if key.startswith(word):
                             create_results_set_helper(dictionary_stack, key, remove_flag)
                             counter += 1
@@ -199,15 +202,15 @@ def create_results_set(user_input):
                                      dict(Counter(dict_one_list[1]) + Counter(dict_two_list[1]))])
 
                 else:
-                    if NoSQLdb.exists_in_search_db(word):
+                    if word in search_dict:
                         create_results_set_helper(dictionary_stack, word, remove_flag)
                     else:
                         plural_str = inflect_engine.plural(word)
                         singular_str = inflect_engine.singular_noun(word)
-                        if plural_str != word and NoSQLdb.exists_in_search_db(plural_str):
+                        if plural_str != word and plural_str in search_dict:
                             create_results_set_helper(dictionary_stack, plural_str,
                                                       remove_flag)
-                        elif singular_str != word and NoSQLdb.exists_in_search_db(singular_str):
+                        elif singular_str != word and singular_str in search_dict:
                             create_results_set_helper(dictionary_stack, singular_str,
                                                       remove_flag)
                         else:  # this is for the cases there are no results - should work
@@ -229,15 +232,15 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
     """
     dictionary_stack.append([{}, {}])
     if remove_flag:
-        for tag in NoSQLdb.retrieve_kv_search_db(key):
+        for tag in search_dict[key]:
             if tag not in dictionary_stack[-1][1]:
                 dictionary_stack[-1][1][tag] = 1
     else:
-        for site in NoSQLdb.retrieve_kv_search_db(key):
-            if NoSQLdb.exists_in_site_db(site) and key in NoSQLdb.retrieve_kv_site_db_dictionary(site):
+        for site in search_dict[key]:
+            if site in site_dict and key in site_dict[site]:
                 if site in dictionary_stack[-1][0]:
                     dictionary_stack[-1][0][site] = \
-                        dictionary_stack[-1][0][site] + NoSQLdb.retrieve_kv_site_db_dictionary(site)[key]
+                        dictionary_stack[-1][0][site] + site_dict[site][key]
                 else:
                     # print(key in NoSQLdb.retrieve_kv_site_db_dictionary(site).keys())
-                    dictionary_stack[-1][0][site] = NoSQLdb.retrieve_kv_site_db_dictionary(site)[key]
+                    dictionary_stack[-1][0][site] = site_dict[site][key]
