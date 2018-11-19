@@ -3,7 +3,7 @@ class Site:
     This class is a data element for SearchEngine. It holds a site name and a site category, both being strings.
     """
 
-    def __init__(self, site_name=None, relevancy_dictionary=None):
+    def __init__(self, site_name=None, relevancy_dictionary=None, time_since_scrape=0):
         """
         Constructor for Site.
         :param site_name: Name of site.
@@ -11,6 +11,10 @@ class Site:
         """
         self.site_name = site_name
         self.relevancy_dictionary = relevancy_dictionary if relevancy_dictionary is not None else dict()
+        self.time_since_scrape = time_since_scrape
+
+    def get_time_since_scrape(self):
+        return self.time_since_scrape
 
     def get_site_name(self):
         """

@@ -1,6 +1,8 @@
 from unqlite import UnQLite
 import ast
 import atexit
+import SearchEngine
+from nltk.corpus import stopwords
 
 """
 Author: Nicholas Wentz
@@ -9,8 +11,12 @@ This is a module which allows the UnQlite NoSQL database to work
 
 # TODO raise error if error?
 
-search_dictionary_db = UnQLite("searchdb")
-site_dictionary_db = UnQLite("sitedb")
+search_dictionary_db = UnQLite("searchdb.db")
+site_dictionary_db = UnQLite("sitedb.db")
+stopword_set = set(stopwords.words('english'))
+
+
+# queue_dictionary_db = UnQLite("queuedb")
 
 
 def store_kv_search_db(key, value):
@@ -20,10 +26,15 @@ def store_kv_search_db(key, value):
     :param value: Site url string
     :return: None
     """
-    if key not in search_dictionary_db.keys():
+    if not exists_in_search_db(key):
+        # print(key, set(key))
         search_dictionary_db[key] = {value}
+        # print(search_dictionary_db[key])
     else:
-        set(search_dictionary_db[key]).add(value)
+        temp_set = retrieve_kv_search_db(key)
+        temp_set.add(value)
+        search_dictionary_db[key] = temp_set
+        # print(search_dictionary_db[key])
 
 
 def store_multiple_kv_search_db(keys, value):
@@ -33,12 +44,12 @@ def store_multiple_kv_search_db(keys, value):
     :param value: Site url string
     :return: None
     """
-    import SearchEngine
-    from nltk.corpus import stopwords
+
     keys = set([SearchEngine.clean_string(word) for word in keys if
-                SearchEngine.clean_string(word) not in stopwords.words('english')])
+                SearchEngine.clean_string(word) not in stopword_set])
+    # print(keys)
     for key in keys:
-        if key not in set(stopwords.words('english')):  # common words from nltk
+        if key not in stopword_set:  # common words from nltk
             if exists_in_search_db(key):
                 store_kv_search_db(key, value)
             else:
@@ -50,6 +61,11 @@ def store_multiple_kv_search_db(keys, value):
                     store_kv_search_db(singular_str, value)
                 else:
                     store_kv_search_db(key, value)
+    keys.clear()
+
+
+# def store_kv_queue_db(value):
+#     queue_dictionary_db[max(iter(queue_dictionary_db), default=0)] = value
 
 
 def store_kv_site_db(key, value):
@@ -59,11 +75,11 @@ def store_kv_site_db(key, value):
     :param value: Site rlevancy dictionary
     :return: None
     """
-    if key in site_dictionary_db.keys():
+    if exists_in_site_db(key):
         # print(NoSQLdb.retrieve_kv_site_db(key).decode())
         # print(ast.literal_eval(NoSQLdb.retrieve_kv_site_db(key).decode()))
-        delete_list = [i for i in ast.literal_eval(retrieve_kv_site_db(key).decode()).keys() if i not in
-                       value]
+        delete_list = [i for i in ast.literal_eval(retrieve_kv_site_db_dictionary(key).decode()).keys() if
+                       i not in value[1]]
         for item in delete_list:
             del search_dictionary_db[item][key]
     site_dictionary_db[key] = value
@@ -75,17 +91,31 @@ def retrieve_kv_search_db(key):
     :param key: key to return value from searchdb for
     :return: list of site strings for key in searchdb
     """
-    return search_dictionary_db[key]  # if key in NoSQLdb.search_dictionary_db.keys() else False
+    return ast.literal_eval(
+        search_dictionary_db[key].decode())  # if key in NoSQLdb.search_dictionary_db.keys() else False
 
 
-def retrieve_kv_site_db(key):
+def retrieve_kv_site_db_dictionary(key):
     """
     This function takes a key and returns the matching relevancy dictionary from sitedb
     :param key: key to return value from sitedb for
     :return: relevancy dictionary for site
     """
-    return site_dictionary_db[key]  # if key in NoSQLdb.site_dictionary_db.keys() else False
+    return ast.literal_eval(site_dictionary_db[key].decode())[1] if exists_in_site_db(key) else None
 
+
+def retrieve_kv_site_db_time(key):
+    return site_dictionary_db[key][0]
+
+
+# def retrieve_kv_queue_db(key):
+#     return queue_dictionary_db[key]
+
+
+# def pop_item_queue_db():
+#
+#     return queue_dictionary_db.pop(next(iter(queue_dictionary_db), default=None))
+#
 
 def get_all_search_db_data():
     """
@@ -125,7 +155,7 @@ def exists_in_search_db(key):
     :param key: Key to check if exists in searchdb
     :return: True if exists in searchdb, False if not
     """
-    return key in search_dictionary_db.keys()
+    return search_dictionary_db.exists(key)
 
 
 def exists_in_site_db(key):
@@ -134,12 +164,18 @@ def exists_in_site_db(key):
     :param key: Key to check if exists in sitedb
     :return: True if exists in sitedb, False if not
     """
-    return key in site_dictionary_db.keys()
+    return site_dictionary_db.exists(key)
+
+
+# def exists_in_queue_db(key):
+#     return queue_dictionary_db.exists(key)
 
 
 def close_and_save():
     search_dictionary_db.close()
     site_dictionary_db.close()
+    # queue_dictionary_db.close()
+    #
 
 
 atexit.register(close_and_save)

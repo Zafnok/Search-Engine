@@ -5,6 +5,7 @@ from collections import Counter
 import itertools
 import re
 import regex
+import time
 
 # TODO rename file
 
@@ -30,7 +31,8 @@ def search_ranking_algorithm(num):
     :param num: number to convert using algorithm
     :return: number converted using algorithm
     """
-    return -abs(num - 10) + 10
+    # return -abs(num - 10) + 10 TODO this needs to be refind, ethics page returns large negative number
+    return num
 
 
 def clean_string(user_string):
@@ -39,7 +41,7 @@ def clean_string(user_string):
     :param user_string: string to clean
     :return: string.strip().lower()
     """
-    return regex.sub(r"(?V1)[^\w--\".]", "", user_string.lower().strip('.'), regex.UNICODE)
+    return regex.sub(r"(?V1)[^\w\s--\".-]", "", user_string.lower().strip('.'), regex.UNICODE)
     # return user_string.strip().lower().translate()(maketrans(string.punctuation)
 
 
@@ -50,7 +52,7 @@ def order_dictionary(dictionary):
     :param dictionary: search result's dictionary to sort by hits
     :return: the sorted dictionary
     """
-    return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+    return sorted(list(dictionary.items()), key=operator.itemgetter(1), reverse=True)
 
 
 def search_keys(user_input):
@@ -62,8 +64,7 @@ def search_keys(user_input):
     :return: a formatted string that shows the sites and number of hits - sorted by number of hits
     """
     if len(user_input.strip()) > 0:
-        results = order_dictionary(
-            create_results_set(interpret_input(clean_string(user_input))))
+        results = order_dictionary(create_results_set(interpret_input(clean_string(user_input))))
         # if len(results) == 0:
         #     new_tag_str = input("Search returned zero results\nWhat were you searching for?\nType "
         #                         "None if you don't want to add to the engine.\n")
@@ -159,7 +160,7 @@ def create_results_set(user_input):
 
     remove_flag_single_char = False
     dictionary_stack = []  # TODO better name
-    for word in clean_string(user_input).split(" "):
+    for word in clean_string(user_input).split():
         if word == "or" or word == "and":
             dict_one_list = dictionary_stack.pop()  # TODO convert tuple to set probably - done
             dict_two_list = dictionary_stack.pop()
@@ -211,7 +212,6 @@ def create_results_set(user_input):
                                                       remove_flag)
                         else:  # this is for the cases there are no results - should work
                             dictionary_stack.append([{}, {}])
-    print(dictionary_stack)
     return {k: v for k, v in dictionary_stack[0][0].items() if k not in dictionary_stack[0][1]} if len(
         dictionary_stack) >= 1 and len(
         dictionary_stack[0]) > 1 else dictionary_stack[0][0] if len(dictionary_stack) >= 1 and len(
@@ -234,8 +234,10 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
                 dictionary_stack[-1][1][tag] = 1
     else:
         for site in NoSQLdb.retrieve_kv_search_db(key):
-            if site in dictionary_stack[-1][0]:
-                dictionary_stack[-1][0][site] = \
-                    dictionary_stack[-1][0][site] + NoSQLdb.retrieve_kv_site_db(site)
-            else:
-                dictionary_stack[-1][0][site] = NoSQLdb.retrieve_kv_site_db(site)
+            if NoSQLdb.exists_in_site_db(site) and key in NoSQLdb.retrieve_kv_site_db_dictionary(site):
+                if site in dictionary_stack[-1][0]:
+                    dictionary_stack[-1][0][site] = \
+                        dictionary_stack[-1][0][site] + NoSQLdb.retrieve_kv_site_db_dictionary(site)[key]
+                else:
+                    # print(key in NoSQLdb.retrieve_kv_site_db_dictionary(site).keys())
+                    dictionary_stack[-1][0][site] = NoSQLdb.retrieve_kv_site_db_dictionary(site)[key]
