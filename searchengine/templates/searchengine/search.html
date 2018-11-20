@@ -1,0 +1,11 @@
+{% if search_result_list %}
+    <ul>
+        {% for result in search_result_list %}
+            <li>
+                <a href="{{ result.0 }}">{{ result.1 }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results available.</p>
+{% endif %}

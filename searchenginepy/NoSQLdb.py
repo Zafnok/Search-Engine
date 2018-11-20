@@ -1,4 +1,5 @@
 from unqlite import UnQLite
+from unqlite import UnQLiteError
 import ast
 import SearchEngine
 from nltk.corpus import stopwords
@@ -24,12 +25,27 @@ def store_kv_search_db(key, value):
     :param value: Site url string
     :return: None
     """
-    if not exists_in_search_db(key):
-        search_dictionary_db[key] = {value}
-    else:
-        temp_set = retrieve_kv_search_db(key)
-        temp_set.add(value)
-        search_dictionary_db[key] = temp_set
+    if key not in stopword_set:  # common words from nltk
+        try:
+            if exists_in_search_db(key):
+                store_kv_search_db_helper(key, value)
+            else:
+                plural_str = SearchEngine.inflect_engine.plural(key)
+                singular_str = SearchEngine.inflect_engine.singular_noun(key)
+                if exists_in_search_db(plural_str):
+                    store_kv_search_db_helper(plural_str, value)
+                elif exists_in_search_db(singular_str):
+                    store_kv_search_db_helper(singular_str, value)
+                else:
+                    search_dictionary_db[key] = {value}
+        except UnQLiteError:
+            pass
+
+
+def store_kv_search_db_helper(key, value):
+    temp_set = retrieve_kv_search_db(key)
+    temp_set.add(value)
+    search_dictionary_db[key] = temp_set
 
 
 def store_multiple_kv_search_db(keys, value):
@@ -43,18 +59,10 @@ def store_multiple_kv_search_db(keys, value):
     keys = set([SearchEngine.clean_string(word) for word in keys if
                 SearchEngine.clean_string(word) not in stopword_set])
     for key in keys:
-        if key not in stopword_set:  # common words from nltk
-            if exists_in_search_db(key):
-                store_kv_search_db(key, value)
-            else:
-                plural_str = SearchEngine.inflect_engine.plural(key)
-                singular_str = SearchEngine.inflect_engine.singular_noun(key)
-                if exists_in_search_db(plural_str):
-                    store_kv_search_db(plural_str, value)
-                elif exists_in_search_db(singular_str):
-                    store_kv_search_db(singular_str, value)
-                else:
-                    store_kv_search_db(key, value)
+        try:
+            store_kv_search_db(key, value)
+        except UnQLiteError:
+            continue
     keys.clear()
 
 
@@ -204,7 +212,10 @@ def exists_in_search_db(key):
     :param key: Key to check if exists in searchdb
     :return: True if exists in searchdb, False if not
     """
-    return search_dictionary_db.exists(key)
+    try:
+        return search_dictionary_db.exists(key)
+    except UnQLiteError:
+        pass
 
 
 def exists_in_site_db(key):

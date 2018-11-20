@@ -1,11 +1,12 @@
 import operator
 import inflect
-import NoSQLdb
+from searchenginepy import NoSQLdb
 from collections import Counter
 import itertools
 import re
 import regex
-from HTMLmaker import generate_html
+
+# from HTMLmaker import generate_html
 
 # TODO need to rework docstrings, they are outdated!!! important
 # TODO some functions reliant on certain type - add_to_search_dictionary, create_results_set_helper
@@ -34,14 +35,15 @@ def initialize_dicts():
     search_dict = NoSQLdb.get_all_search_db_data()
 
 
-def search_ranking_algorithm(num):
+# TODO this is WIP, trying to make more factors for ranking
+def search_ranking_algorithm(list_num):
     """
     This function takes a number and converts it into a relevancy score
-    :param num: number to convert using algorithm
+    :param list_num: list of numbers to convert using algorithm
     :return: number converted using algorithm
     """
     # return -abs(num - 10) + 10 TODO this needs to be refind, ethics page returns large negative number
-    return num
+    return pow(2 * list_num[0] + list_num[1], 2) + list_num[2]
 
 
 def clean_string(user_string):
@@ -81,6 +83,7 @@ def search_keys(user_input):
         #         self.add_to_search_dictionary(user_input.strip().split(" "), new_tag_str)
         # else:
         # print(results)
+        # TODO make this return [[page, title], [page, title]]
         generate_html(clean_string(user_input), results)
     else:
         return "Invalid input, please try again."
@@ -238,7 +241,7 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
             if site in site_dict and key in site_dict[site]:
                 if site in dictionary_stack[-1][0]:
                     dictionary_stack[-1][0][site] = \
-                        dictionary_stack[-1][0][site] + site_dict[site][key]
+                        dictionary_stack[-1][0][site] + search_ranking_algorithm(site_dict[site][key])
                 else:
                     # print(key in NoSQLdb.retrieve_kv_site_db_dictionary(site).keys())
-                    dictionary_stack[-1][0][site] = site_dict[site][key]
+                    dictionary_stack[-1][0][site] = search_ranking_algorithm(site_dict[site][key])
