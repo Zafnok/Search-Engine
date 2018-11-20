@@ -1,8 +1,8 @@
 from unqlite import UnQLite
 import ast
-import atexit
 import SearchEngine
 from nltk.corpus import stopwords
+import time
 
 """
 Author: Nicholas Wentz
@@ -13,10 +13,8 @@ This is a module which allows the UnQlite NoSQL database to work
 
 search_dictionary_db = UnQLite("searchdb.db")
 site_dictionary_db = UnQLite("sitedb.db")
+robots_txt_info_db = UnQLite("robotsdb.db")
 stopword_set = set(stopwords.words('english'))
-
-
-# queue_dictionary_db = UnQLite("queuedb")
 
 
 def store_kv_search_db(key, value):
@@ -27,14 +25,11 @@ def store_kv_search_db(key, value):
     :return: None
     """
     if not exists_in_search_db(key):
-        # print(key, set(key))
         search_dictionary_db[key] = {value}
-        # print(search_dictionary_db[key])
     else:
         temp_set = retrieve_kv_search_db(key)
         temp_set.add(value)
         search_dictionary_db[key] = temp_set
-        # print(search_dictionary_db[key])
 
 
 def store_multiple_kv_search_db(keys, value):
@@ -47,7 +42,6 @@ def store_multiple_kv_search_db(keys, value):
 
     keys = set([SearchEngine.clean_string(word) for word in keys if
                 SearchEngine.clean_string(word) not in stopword_set])
-    # print(keys)
     for key in keys:
         if key not in stopword_set:  # common words from nltk
             if exists_in_search_db(key):
@@ -64,10 +58,6 @@ def store_multiple_kv_search_db(keys, value):
     keys.clear()
 
 
-# def store_kv_queue_db(value):
-#     queue_dictionary_db[max(iter(queue_dictionary_db), default=0)] = value
-
-
 def store_kv_site_db(key, value):
     """
     Stores a url string : relevancy dictionary pairing in sitedb file.
@@ -79,10 +69,21 @@ def store_kv_site_db(key, value):
         # print(NoSQLdb.retrieve_kv_site_db(key).decode())
         # print(ast.literal_eval(NoSQLdb.retrieve_kv_site_db(key).decode()))
         delete_list = [i for i in ast.literal_eval(retrieve_kv_site_db_dictionary(key).decode()).keys() if
-                       i not in value[1]]
+                       i not in value[2]]
         for item in delete_list:
             del search_dictionary_db[item][key]
     site_dictionary_db[key] = value
+
+
+def store_kv_robots_db(key, value):
+    """
+    This function stores the value at the specified key in the robotsdb
+    :param key: key to store value at in robotsdb
+    :param value: value to store at key in robotsdb
+    :return: None
+    """
+    # value will be list [(requests, seconds), [num_request, time_since_first], crawl_delay]
+    robots_txt_info_db[key] = value
 
 
 def retrieve_kv_search_db(key):
@@ -101,21 +102,68 @@ def retrieve_kv_site_db_dictionary(key):
     :param key: key to return value from sitedb for
     :return: relevancy dictionary for site
     """
-    return ast.literal_eval(site_dictionary_db[key].decode())[1] if exists_in_site_db(key) else None
+    return ast.literal_eval(site_dictionary_db[key].decode())[2] if exists_in_site_db(key) else None
 
 
 def retrieve_kv_site_db_time(key):
-    return site_dictionary_db[key][0]
+    """
+    This function returns the time of last visit
+    :param key: site url
+    :return: last visit time
+    """
+    return ast.literal_eval(site_dictionary_db[key].decode())[0]
 
 
-# def retrieve_kv_queue_db(key):
-#     return queue_dictionary_db[key]
+def retrieve_kv_site_db_title(key):
+    """
+    This function returns the <title> of the site
+    :param key: site url
+    :return: title tag of site
+    """
+    return ast.literal_eval(site_dictionary_db[key].decode())[1]
 
 
-# def pop_item_queue_db():
-#
-#     return queue_dictionary_db.pop(next(iter(queue_dictionary_db), default=None))
-#
+# value will be list [(requests, seconds), [time1, time2, time3], crawl_delay]
+def retrieve_kv_robots_db(key):
+    """
+    This function returns the list that is stored in the robots db at the key specified
+    :param key: key for db to search on
+    :return: the list at the specified key
+    """
+    return ast.literal_eval(robots_txt_info_db[key].decode())
+
+
+def can_make_request(key):
+    """
+    This function says whether a request can be made to a site or not
+    :param key: site url
+    :return: True if crawler can proceed, False otherwise
+    """
+    robots_info = retrieve_kv_robots_db(key)
+    need_update = False
+    for times in reversed(robots_info[1]):
+        if robots_info[0][1] is not None and time.time() - times >= robots_info[0][1]:
+            times = -1
+            need_update = True
+    if need_update:
+        store_kv_robots_db(key, robots_info)
+    if (robots_info[0][0] is None or robots_info[0][0] > robots_info[1].count(-1)) and (
+            robots_info[2] is None or time.time() - robots_info[1].max() > robots_info[2]):
+        return True
+    return False
+
+
+def make_request(key):
+    """
+    This function changes one of the times in the respective site's url
+    :param key: key to change one of the times
+    :return: None
+    """
+    robots_info = retrieve_kv_robots_db(key)
+    if robots_info[0][1] is not None:
+        robots_info[1][robots_info[1].index(-1)] = time.time()
+
+
 # TODO this takes a long time when retrieving into memory
 def get_all_search_db_data():
     """
@@ -168,15 +216,20 @@ def exists_in_site_db(key):
     return site_dictionary_db.exists(key)
 
 
-# def exists_in_queue_db(key):
-#     return queue_dictionary_db.exists(key)
+def exists_in_robots_db(key):
+    """
+    This function checks whether the key exists in robotsdb
+    :param key: key to check if exists in robotsdb
+    :return: True if exists in robotsdb, False if not
+    """
+    return robots_txt_info_db.exists(key)
 
 
 def close_and_save():
+    """
+    This function closes the databases so that they can save
+    :return: None
+    """
     search_dictionary_db.close()
     site_dictionary_db.close()
-    # queue_dictionary_db.close()
-    #
-
-
-atexit.register(close_and_save)
+    robots_txt_info_db.close()

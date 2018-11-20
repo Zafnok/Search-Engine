@@ -5,33 +5,27 @@ from collections import Counter
 import itertools
 import re
 import regex
-from HTMLmaker import generate_html
 
+# import time
+
+# TODO rename file
+
+
+# TODO webcrawl - in progress
 # TODO need to rework docstrings, they are outdated!!! important
 # TODO some functions reliant on certain type - add_to_search_dictionary, create_results_set_helper
 
 """
-Author: Nicholas Wentz
 This module describes a search engine that uses a dictionary of tag : Site pairs
 The dictionary's values are sets of Sites and the keys are string tags
 """
 
 inflect_engine = inflect.engine()
+site_dict = {k: v[1] for k, v in NoSQLdb.get_all_site_db_data().items()}
+search_dict = NoSQLdb.get_all_search_db_data()
+
+
 # inflect is used for natural language processing, turns plurals into singulars and vice versa
-site_dict = dict()
-search_dict = dict()
-
-
-def initialize_dicts():
-    """
-    This function initializes the dictionaries used. This is necessary as otherwise the dictionaries would be
-    initialized to None and would cause errors in modules that rely on SearchEngine (i.e. WebCrawler, which
-    populates the NoSQLdb)
-    :return: None
-    """
-    global site_dict, search_dict
-    site_dict = {k: v[2] for k, v in NoSQLdb.get_all_site_db_data().items()}
-    search_dict = NoSQLdb.get_all_search_db_data()
 
 
 def search_ranking_algorithm(num):
@@ -80,8 +74,13 @@ def search_keys(user_input):
         #     if not new_tag_str.lower().strip() == "none":
         #         self.add_to_search_dictionary(user_input.strip().split(" "), new_tag_str)
         # else:
-        # print(results)
-        generate_html(clean_string(user_input), results)
+        if len(results) != 0:
+            return_str = ""
+            for pair in results:
+                return_str += (pair[0] + " - hits: " + str(
+                    pair[1]) + "\n")  # TODO eventually convert back to Site object
+                # return_str += (pair[0].get_site_name() + " - hits: " + str(pair[1]) + "\n")
+            return return_str
     else:
         return "Invalid input, please try again."
 
@@ -95,6 +94,7 @@ def interpret_input(user_input):
     postfix_string = ""
     operator_stack = []
     # inner-most list comprehension splits based on quotes
+    # TODO maybe better way to check if string empty
     # next-level out list comprehension conditionally splits - if the index is even, it will split on spaces,
     # other-wise (quoted strings) it will return a list of the one element, enclosed by quotes - FILTER MOVED HERE:
     # filters to check if the strip returns an empty string
@@ -107,6 +107,7 @@ def interpret_input(user_input):
              ]) if len(outer_string.strip()) > 0 and not outer_string.strip().isspace()]))
     i = 0
     while i < len(ls):
+        # val = ls[i] - for debugging
         if i < len(ls):
             if re.match("^[(]+$", ls[i]):
                 # this regex matches only open parentheses, and only if the whole word is
@@ -161,10 +162,10 @@ def create_results_set(user_input):
     """
 
     remove_flag_single_char = False
-    dictionary_stack = []
+    dictionary_stack = []  # TODO better name
     for word in clean_string(user_input).split():
         if word == "or" or word == "and":
-            dict_one_list = dictionary_stack.pop()
+            dict_one_list = dictionary_stack.pop()  # TODO convert tuple to set probably - done
             dict_two_list = dictionary_stack.pop()
             if word == "and":
                 dictionary_stack.append([{key: dict_one_list[0][key] for key in dict_one_list[0] if
@@ -185,7 +186,8 @@ def create_results_set(user_input):
                 if len(word) == 0:
                     remove_flag_single_char = True
             if not remove_flag_single_char:
-                if word[-1] == '*':
+                if word[-1] == '*':  # TODO change len to -1
+                    # TODO this creates several lists of dicts in stack
                     word = word[0:-1]
                     counter = 0
                     for key in search_dict:
@@ -216,7 +218,7 @@ def create_results_set(user_input):
     return {k: v for k, v in dictionary_stack[0][0].items() if k not in dictionary_stack[0][1]} if len(
         dictionary_stack) >= 1 and len(
         dictionary_stack[0]) > 1 else dictionary_stack[0][0] if len(dictionary_stack) >= 1 and len(
-        dictionary_stack[0]) == 1 else {}
+        dictionary_stack[0]) == 1 else {}  # TODO condense return
     # return difference between results_set and exclude_from_results_set based on keys and not key-value pairs
 
 

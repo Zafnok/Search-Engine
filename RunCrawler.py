@@ -1,5 +1,5 @@
 import sys
-import WebScraper
+import WebCrawler
 
 # import gc
 
@@ -7,7 +7,7 @@ if __name__ == "__main__":
     try:
         x = 1
         while True:
-            WebScraper.scrape()
+            WebCrawler.crawl()
             # gc.collect()
 
     except KeyboardInterrupt:

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QPushButton, QMainWindow, QApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import time
-import WebScraper
+import WebCrawler
 
 
 # TODO change console output to GUI display
@@ -22,7 +22,7 @@ class Worker(QObject):
         while self.working:
             # TODO other part of web scraper
             print(int(QThread.currentThreadId()))
-            WebScraper.scrape()
+            WebCrawler.crawl()
             time.sleep(1)  # pauses thread
 
         self.finished.emit()  # alert our gui that the loop stopped
