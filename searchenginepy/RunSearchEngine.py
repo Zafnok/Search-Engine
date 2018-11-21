@@ -15,7 +15,7 @@ if __name__ == "__main__":
             else:
                 # print(SearchEngine.interpret_input(input_str))
                 start = time.time()
-                SearchEngine.search_keys(input_str)
+                print(SearchEngine.search_keys(input_str))
                 # output_str = SearchEngine.search_keys(input_str)
                 # end = time.time()
                 print(time.time() - start)

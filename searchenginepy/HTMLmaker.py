@@ -1,4 +1,4 @@
-import NoSQLdb
+from searchenginepy import NoSQLdb
 import os  # for making dir if doesn't exist and getting paths
 
 """

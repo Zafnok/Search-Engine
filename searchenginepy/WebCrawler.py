@@ -46,8 +46,7 @@ def build_queue(url):
     """
 
     for link in \
-            BeautifulSoup(requests.get(url, verify=
-            r"C:\Users\Zafno\AppData\Local\Programs\Python\Python37\lib\site-packages\certifi\cacert.pem").text,
+            BeautifulSoup(requests.get(url).text,
                           # this is a path to an SSL certificate, since I kept getting SSL errors
                           features="html.parser").find_all('a', href=re.compile(r"^[^#]")):
         other_url = urljoin(url, link['href'])
@@ -83,7 +82,6 @@ def crawl():
                 NoSQLdb.make_request(root_domain)
                 try:
                     content_type = requests.head(site,
-                                                 verify=r"C:\Users\Zafno\AppData\Local\Programs\Python\Python37\lib\site-packages\certifi\cacert.pem",
                                                  allow_redirects=True).headers.get("content-type")
                     if content_type[0:content_type.find('/')] == 'text':
                         print(site)
@@ -91,8 +89,7 @@ def crawl():
                             site)  # TODO need to make it so that queue doesn't keep getting bigger and no progress made -
                         # TODO ordering of queue somehow? - queue is FIFO so maybe no big deal...
                         soup = \
-                            BeautifulSoup(requests.get(site, verify=
-                            r"C:\Users\Zafno\AppData\Local\Programs\Python\Python37\lib\site-packages\certifi\cacert.pem").text,
+                            BeautifulSoup(requests.get(site).text,
                                           features="html.parser")  # TODO we have detected that your browser is not javascript enabled
                         site_relevancy_dictionary = dict()
                         for meta in soup.find_all('meta'):
@@ -100,20 +97,24 @@ def crawl():
                                 if meta.attrs['name'] == 'keywords':
                                     count = Counter(
                                         [SearchEngine.clean_string(word) for word in meta.attrs['content'].split()])
+                                    count = {key: value for key, value in count.items() if
+                                             not (len(key) == 0 or key.isspace())}
                                     for key, value in count.items():
                                         if key in site_relevancy_dictionary:
-                                            site_relevancy_dictionary[key][0] += 1
+                                            site_relevancy_dictionary[key][0] = value
                                         else:
-                                            site_relevancy_dictionary[key] = [1, 0, 0]
+                                            site_relevancy_dictionary[key] = [value, 0, 0]
 
                                 if meta.attrs['name'] == 'description':
                                     count = Counter(
                                         [SearchEngine.clean_string(word) for word in meta.attrs['content'].split()])
+                                    count = {key: value for key, value in count.items() if
+                                             not (len(key) == 0 or key.isspace())}
                                     for key, value in count.items():
                                         if key in site_relevancy_dictionary:
-                                            site_relevancy_dictionary[key][1] += 1
+                                            site_relevancy_dictionary[key][1] = value
                                         else:
-                                            site_relevancy_dictionary[key] = [0, 1, 0]
+                                            site_relevancy_dictionary[key] = [0, value, 0]
                         texts = soup.findAll(text=True)
                         visible_texts = list(filter(visible, texts))
                         count = Counter(
@@ -121,9 +122,9 @@ def crawl():
                         count = {key: value for key, value in count.items() if not (len(key) == 0 or key.isspace())}
                         for key, value in count.items():
                             if key in site_relevancy_dictionary:
-                                site_relevancy_dictionary[key][2] += 1
+                                site_relevancy_dictionary[key][2] = value
                             else:
-                                site_relevancy_dictionary[key] = [0, 0, 1]
+                                site_relevancy_dictionary[key] = [0, 0, value]
                         NoSQLdb.store_multiple_kv_search_db([*site_relevancy_dictionary], site)
                         NoSQLdb.store_kv_site_db(site,
                                                  [time.time(), soup.title.string if soup.title is not None else site,

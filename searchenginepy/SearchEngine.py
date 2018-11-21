@@ -1,6 +1,6 @@
 import operator
 import inflect
-from searchenginepy import NoSQLdb
+import NoSQLdb
 from collections import Counter
 import itertools
 import re
@@ -84,7 +84,8 @@ def search_keys(user_input):
         # else:
         # print(results)
         # TODO make this return [[page, title], [page, title]]
-        generate_html(clean_string(user_input), results)
+        return [[result[0], NoSQLdb.retrieve_kv_site_db_title(result[0])] for result in results]
+        # generate_html(clean_string(user_input), results) TODO change to django
     else:
         return "Invalid input, please try again."
 
@@ -238,6 +239,7 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
                 dictionary_stack[-1][1][tag] = 1
     else:
         for site in search_dict[key]:
+            print(site)
             if site in site_dict and key in site_dict[site]:
                 if site in dictionary_stack[-1][0]:
                     dictionary_stack[-1][0][site] = \

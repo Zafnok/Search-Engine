@@ -4,6 +4,7 @@ import ast
 import SearchEngine
 from nltk.corpus import stopwords
 import time
+import os
 
 """
 Author: Nicholas Wentz
@@ -12,9 +13,9 @@ This is a module which allows the UnQlite NoSQL database to work
 
 # TODO raise error if error?
 
-search_dictionary_db = UnQLite("searchdb.db")
-site_dictionary_db = UnQLite("sitedb.db")
-robots_txt_info_db = UnQLite("robotsdb.db")
+search_dictionary_db = UnQLite(os.path.join(os.path.dirname(__file__), "searchdb.db"))
+site_dictionary_db = UnQLite(os.path.join(os.path.dirname(__file__), "sitedb.db"))
+robots_txt_info_db = UnQLite(os.path.join(os.path.dirname(__file__), "robotsdb.db"))
 stopword_set = set(stopwords.words('english'))
 
 

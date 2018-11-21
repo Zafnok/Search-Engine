@@ -1,11 +1,11 @@
-# from django.shortcuts import render
-from django.http import HttpResponse
-import searchenginepy.SearchEngine
+from django.shortcuts import render
+from searchenginepy import SearchEngine
 
-def index(request):
-    search_result_list =
+SearchEngine.initialize_dicts()
 
 
 def search_result(request, query):
-    return HttpResponse("You're looking at the search results for {}".format(query))
+    search_result_list = SearchEngine.search_keys(query)
+    context = {'search_result_list': search_result_list}
+    return render(request, 'searchengine/search.html', context)
 # Create your views here.
