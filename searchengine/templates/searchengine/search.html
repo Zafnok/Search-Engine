@@ -27,15 +27,16 @@
 <div class="pagination">
     <span class="step-links">
         {% if results.has_previous %}
-            <a href="{% url 'search' %}?q={{ query | urlencode}}&page=1">&laquo; first</a>
-            <a href="{% url 'search' %}?q={{ query }}&page={{ results.previous_page_number }}">previous</a>
+            <a href="{% url 'search' %}?q={{ query | urlencode }}&page=1">&laquo; first</a>
+            {# urlencode makes it so query doesn't break with spaces (haven't tested) #}
+            <a href="{% url 'search' %}?q={{ query | urlencode }}&page={{ results.previous_page_number }}">previous</a>
         {% endif %}
-        <span class="current">
+        <span class="current" style="font-family: sans-serif">
             Page {{ results.number }} of {{ results.paginator.num_pages }}
         </span>
         {% if results.has_next %}
-            <a href="{% url 'search' %}?q={{ query }}&page={{ results.next_page_number }}">next</a>
-            <a href="{% url 'search' %}?q={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+            <a href="{% url 'search' %}?q={{ query | urlencode }}&page={{ results.next_page_number }}">next</a>
+            <a href="{% url 'search' %}?q={{ query | urlencode }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
     </span>
 </div>

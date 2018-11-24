@@ -51,7 +51,7 @@ def clean_string(user_string):
     :param user_string: string to clean
     :return: string.strip().lower()
     """
-    return regex.sub(r"(?V1)[^\w\s--\".-]", "", user_string.lower().strip('.'), regex.UNICODE)
+    return regex.sub(r"(?V1)[[^\w\s]--[()\".\-]]", "", user_string.lower().strip('.'), regex.UNICODE)
     # return user_string.strip().lower().translate()(maketrans(string.punctuation)
 
 
@@ -143,6 +143,7 @@ def interpret_input(user_input):
     # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
 
+# TODO IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!! - no longer working
 def create_results_set(user_input):
     """
     This function is called by search_keys and creates the actual results set used by search_keys to make the
