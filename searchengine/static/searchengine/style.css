@@ -1,0 +1,41 @@
+a:link {
+    font-family: sans-serif; /*Roboto wasn't working - it is the font that Google appears to use.*/
+    margin-bottom: 0px; /*don't know if still needed - was for making link and the URL after display close to each other*/
+}
+
+h6 {
+    font-family: sans-serif;
+    font-weight: normal; /*font stuff needed since these are originally headers, and they need to be overridden so I can use different font styles - not a master at CSS/webdev*/
+    font-style: normal;
+    color: forestgreen;
+    font-size: .8em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+h5 {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+h4 {
+    font-family: sans-serif;
+    font-weight: normal;
+    color: gray;
+    font-style: normal;
+    font-size: 1em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+input[type=text] {
+    width: 90%; /*makes search bar longer*/
+}
+
+input[type=submit] {
+    width: 9%; /*for consistency - at smaller resolutions does not display correctly, but not a CSS master*/
+}

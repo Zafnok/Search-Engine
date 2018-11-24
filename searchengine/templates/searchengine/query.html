@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'searchengine/style.css' %}">
+<html>
+    <head>
+        <title>Search</title>
+    </head>
+    <body>
+        {% if error %}
+            <p style="color: red; font-family: sans-serif">Please submit a search term.</p>
+        {% endif %}
+        <form action="" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+    </body>
+</html>

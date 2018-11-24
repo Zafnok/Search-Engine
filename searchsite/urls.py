@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import include as inc, url
 
 urlpatterns = [
-    path('searchengine/', include('searchengine.urls')), path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), url(r'^', include('searchengine.urls'))
+    # this sends anything that hasn't been matched yet to searchengine.urls
+    ,
 ]

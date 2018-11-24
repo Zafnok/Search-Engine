@@ -179,6 +179,7 @@ def get_all_search_db_data():
     This function returns the full dictionary for keys and their values from searchdb
     :return: the full data for searchdb
     """
+    # print(os.path.join(os.path.dirname(__file__), "searchdb.db"))
     return {key: ast.literal_eval(value.decode()) for (key, value) in search_dictionary_db.items()}
 
 

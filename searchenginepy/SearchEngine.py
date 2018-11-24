@@ -6,8 +6,6 @@ import itertools
 import re
 import regex
 
-# from HTMLmaker import generate_html
-
 # TODO need to rework docstrings, they are outdated!!! important
 # TODO some functions reliant on certain type - add_to_search_dictionary, create_results_set_helper
 
@@ -31,7 +29,8 @@ def initialize_dicts():
     :return: None
     """
     global site_dict, search_dict
-    site_dict = {k: v[2] for k, v in NoSQLdb.get_all_site_db_data().items()}
+    site_dict = {k: [v[1], v[2]] for k, v in
+                 NoSQLdb.get_all_site_db_data().items()}  # TODO NoSQL calls later maybe impact perf
     search_dict = NoSQLdb.get_all_search_db_data()
 
 
@@ -76,16 +75,7 @@ def search_keys(user_input):
     """
     if len(user_input.strip()) > 0:
         results = order_dictionary(create_results_set(interpret_input(clean_string(user_input))))
-        # if len(results) == 0:
-        #     new_tag_str = input("Search returned zero results\nWhat were you searching for?\nType "
-        #                         "None if you don't want to add to the engine.\n")
-        #     if not new_tag_str.lower().strip() == "none":
-        #         self.add_to_search_dictionary(user_input.strip().split(" "), new_tag_str)
-        # else:
-        # print(results)
-        # TODO make this return [[page, title], [page, title]]
-        return [[result[0], NoSQLdb.retrieve_kv_site_db_title(result[0])] for result in results]
-        # generate_html(clean_string(user_input), results) TODO change to django
+        return [[result[0], site_dict[result[0]][0]] for result in results]
     else:
         return "Invalid input, please try again."
 
@@ -239,11 +229,11 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
                 dictionary_stack[-1][1][tag] = 1
     else:
         for site in search_dict[key]:
-            print(site)
-            if site in site_dict and key in site_dict[site]:
+            if site in site_dict and key in site_dict[site][1]:
                 if site in dictionary_stack[-1][0]:
                     dictionary_stack[-1][0][site] = \
-                        dictionary_stack[-1][0][site] + search_ranking_algorithm(site_dict[site][key])
+                        dictionary_stack[-1][0][site] + search_ranking_algorithm(site_dict[site][1][key])
+                    # 1 in site_dict[site] is for relevancy dictionary, since 0 is the title - needed for speeding up and eliminating NoSQLdb calls
                 else:
                     # print(key in NoSQLdb.retrieve_kv_site_db_dictionary(site).keys())
-                    dictionary_stack[-1][0][site] = search_ranking_algorithm(site_dict[site][key])
+                    dictionary_stack[-1][0][site] = search_ranking_algorithm(site_dict[site][1][key])

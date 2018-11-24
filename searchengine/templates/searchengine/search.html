@@ -1,11 +1,42 @@
+{% include 'searchengine/query.html' %}
+{# this adds query.html to the top, allowing for search to be on same page as results #}
+{% load static %}{# this and the following line adds the CSS properties to this template #}
+<link rel="stylesheet" type="text/css" href="{% static 'searchengine/style.css' %}">
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+
 {% if search_result_list %}
-    <ul style="list-style: none">
-        {% for result in search_result_list %}
+    <ul style="list-style: none">{# TODO look into adding this to style.css #}
+        <h5>You searched for: <strong>{{ query }}</strong></h5>
+        <h4>Found {{ search_result_list|length }} result{{ search_result_list|pluralize }}.</h4>
+        {# pluralize adds an s if there is more than 1 result #}
+        {% for result in results %}
             <li>
-                <a href="{{ result.0 }}">{{ result.1 }}</a>
+                <a href="{{ result.0 }}">{{ result.1 }}</a>{# href pointing to url with text displayed as title of page #}
+                <h6>{{ result.0 }}</h6>{# url is displayed underneath but not clickable - like Google #}
             </li>
         {% endfor %}
     </ul>
 {% else %}
     <p>No results available.</p>
 {% endif %}
+</body>
+<div class="pagination">
+    <span class="step-links">
+        {% if results.has_previous %}
+            <a href="{% url 'search' %}?q={{ query | urlencode}}&page=1">&laquo; first</a>
+            <a href="{% url 'search' %}?q={{ query }}&page={{ results.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}
+        </span>
+        {% if results.has_next %}
+            <a href="{% url 'search' %}?q={{ query }}&page={{ results.next_page_number }}">next</a>
+            <a href="{% url 'search' %}?q={{ query }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</html>
