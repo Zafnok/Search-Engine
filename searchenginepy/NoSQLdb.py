@@ -75,12 +75,11 @@ def store_kv_site_db(key, value):
     :return: None
     """
     if exists_in_site_db(key):
-        # print(NoSQLdb.retrieve_kv_site_db(key).decode())
-        # print(ast.literal_eval(NoSQLdb.retrieve_kv_site_db(key).decode()))
-        delete_list = [i for i in ast.literal_eval(retrieve_kv_site_db_dictionary(key).decode()).keys() if
-                       i not in value[2]]
+        delete_list = [i for i in retrieve_kv_site_db_dictionary(key) if i not in value[2]]
         for item in delete_list:
-            del search_dictionary_db[item][key]
+            temp_list = retrieve_kv_search_db(item)
+            del temp_list[item][key]
+            search_dictionary_db[item] = temp_list
     site_dictionary_db[key] = value
 
 
@@ -102,7 +101,7 @@ def retrieve_kv_search_db(key):
     :return: list of site strings for key in searchdb
     """
     return ast.literal_eval(search_dictionary_db[key].decode())
-    # if key in NoSQLdb.search_dictionary_db.keys() else False
+    # if key in NoSQLdb.search_dictionary_db.keys() else False - don't know if will ever be needed
 
 
 def retrieve_kv_site_db_dictionary(key):
@@ -150,9 +149,10 @@ def can_make_request(key):
     """
     robots_info = retrieve_kv_robots_db(key)
     need_update = False
-    for times in reversed(robots_info[1]):
+    for index, times in enumerate(reversed(robots_info[1])):
         if robots_info[0][1] is not None and time.time() - times >= robots_info[0][1]:
-            times = -1
+            robots_info[1][-1 * index - 1] = -1  # sets time to -1 in the index - negative is due to looking in reverse
+            # in initial for loop
             need_update = True
     if need_update:
         store_kv_robots_db(key, robots_info)
@@ -179,7 +179,6 @@ def get_all_search_db_data():
     This function returns the full dictionary for keys and their values from searchdb
     :return: the full data for searchdb
     """
-    # print(os.path.join(os.path.dirname(__file__), "searchdb.db"))
     return {key: ast.literal_eval(value.decode()) for (key, value) in search_dictionary_db.items()}
 
 

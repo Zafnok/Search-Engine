@@ -2,11 +2,21 @@ from django.shortcuts import render
 from searchenginepy import SearchEngine
 from django.core.paginator import Paginator
 
+"""
+Author: Nicholas Wentz
+"""
 SearchEngine.initialize_dicts()  # needed otherwise dicts aren't initialized and every query shows no results
 
 
 # all Django code learned from Django tutorials on their url - TODO add later
-def search(request):  # combined query and search forms
+def search(request):
+    """
+    This view is used for the first loading of the search page - returns the query HTML form - and for the loading of
+    search results - loads a page of 10 results.
+    :param request: HttpRequest
+    :return: A rendered page
+    """
+    # combined query and search forms
     error = False
     if 'q' in request.GET:  # checks if a query is empty or not
         q = request.GET['q']

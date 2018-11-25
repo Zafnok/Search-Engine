@@ -3,8 +3,6 @@ import WebCrawler
 from requests.exceptions import SSLError
 from urllib.error import URLError
 
-# import gc
-
 if __name__ == "__main__":
     try:
         x = 1
@@ -13,7 +11,6 @@ if __name__ == "__main__":
                 WebCrawler.crawl()
             except SSLError or URLError:
                 continue
-            # gc.collect()
 
     except KeyboardInterrupt:
         sys.exit()
