@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 SearchEngine.initialize_dicts()  # needed otherwise dicts aren't initialized and every query shows no results
 
 
+# all Django code learned from Django tutorials on their url - TODO add later
 def search(request):  # combined query and search forms
     error = False
     if 'q' in request.GET:  # checks if a query is empty or not

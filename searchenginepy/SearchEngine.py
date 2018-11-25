@@ -6,9 +6,7 @@ import itertools
 import re
 import regex
 
-# TODO need to rework docstrings, they are outdated!!! important
-# TODO some functions reliant on certain type - add_to_search_dictionary, create_results_set_helper
-
+# TODO quoted strings no longer work - should somehow store relevancy dictionary by order?
 """
 Author: Nicholas Wentz
 This module describes a search engine that uses a dictionary of tag : Site pairs
@@ -41,7 +39,7 @@ def search_ranking_algorithm(list_num):
     :param list_num: list of numbers to convert using algorithm
     :return: number converted using algorithm
     """
-    # return -abs(num - 10) + 10 TODO this needs to be refind, ethics page returns large negative number
+    # return -abs(num - 10) + 10 TODO this needs to be refined, ethics page returns large negative number
     return pow(2 * list_num[0] + list_num[1], 2) + list_num[2]
 
 
@@ -137,13 +135,9 @@ def interpret_input(user_input):
         else:
             postfix_string += operator_stack.pop() + " "
     return postfix_string
-
-    # TODO create function to make this more concise
-    # TODO does this need to be so wordy? Look into libraries/use Site more - can be condensed
     # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
 
-# TODO IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!! - no longer working
 def create_results_set(user_input):
     """
     This function is called by search_keys and creates the actual results set used by search_keys to make the

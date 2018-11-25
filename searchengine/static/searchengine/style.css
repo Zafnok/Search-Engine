@@ -37,5 +37,12 @@ input[type=text] {
 }
 
 input[type=submit] {
-    width: 9%; /*for consistency - at smaller resolutions does not display correctly, but not a CSS master*/
+    background: transparent url(search.png); /*icon from iconfinder*/
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    vertical-align: middle;
 }
