@@ -8,7 +8,7 @@ Author: Nicholas Wentz
 SearchEngine.initialize_dicts()  # needed otherwise dicts aren't initialized and every query shows no results
 
 
-# all Django code learned from Django tutorials on their url - TODO add later
+# all Django code learned from https://docs.djangoproject.com/en/2.1/intro/tutorial01/
 def search(request):
     """
     This view is used for the first loading of the search page - returns the query HTML form - and for the loading of

@@ -55,6 +55,7 @@ def build_queue(url):
             FileQueue.enqueue(other_url)
 
 
+# TODO same site can be added twice if redirected - e.g. wikipedia World_War_II and Second_World_War
 def crawl():
     """
     Dequeues the site_queue, then looks in that site for the description, adds each word to the search engine

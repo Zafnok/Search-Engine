@@ -50,7 +50,6 @@ def clean_string(user_string):
     :return: string.strip().lower()
     """
     return regex.sub(r"(?V1)[[^\w\s]--[()\".\-]]", "", user_string.lower().strip('.'), regex.UNICODE)
-    # return user_string.strip().lower().translate()(maketrans(string.punctuation)
 
 
 def order_dictionary(dictionary):
@@ -108,7 +107,10 @@ def interpret_input(user_input):
             elif re.match("^[)]+$", ls[i]):
                 ls[i - 1:i + 1] = [''.join(ls[i - 1:i + 1])]
                 i -= 1
-            elif (ls[i] != 'or' and ls[i] != 'and') and i % 2 == 1:
+            elif ls[i][0] == '-' and i % 2 == 1:
+                ls.insert(i, 'and')
+            elif (ls[i] != 'or' and ls[i] != 'and' and ls[i][0] != '-') and i % 2 == 1:
+                # TODO the more complicated queries are working but somehow or is being inserted for blah -blah
                 ls.insert(i, 'or')
         i += 1
     for word in ls:
@@ -138,6 +140,9 @@ def interpret_input(user_input):
     # TODO NOT operator - should be done, but maybe add NOT instead of just -
 
 
+# TODO in testing, a -b works but a - b doesn't. also, a -b works, a and b works, but (a -b) and c does not work
+# TODO - should work now
+# (a -b) and c returns same result as (a -b) a = philosophy b = feminism c = mathematics
 def create_results_set(user_input):
     """
     This function is called by search_keys and creates the actual results set used by search_keys to make the
@@ -148,21 +153,20 @@ def create_results_set(user_input):
     :return: the results_set - excluded_from_results_set which is another dictionary populated by the user_input
     words which start with the - operator.
     """
-
     remove_flag_single_char = False
     dictionary_stack = []
     for word in clean_string(user_input).split():
         if word == "or" or word == "and":
-            dict_one_list = dictionary_stack.pop()
-            dict_two_list = dictionary_stack.pop()
-            if word == "and":
-                dictionary_stack.append([{key: dict_one_list[0][key] for key in dict_one_list[0] if
-                                          key in dict_two_list[0]},
-                                         {key: dict_one_list[1][key] for key in dict_one_list[1] if
-                                          key in dict_two_list[1]}])
-            else:
-                dictionary_stack.append([dict(Counter(dict_one_list[0]) + Counter(dict_two_list[0])),
-                                         dict(Counter(dict_one_list[1]) + Counter(dict_two_list[1]))])
+            if len(dictionary_stack) > 1:
+                dict_one_list = dictionary_stack.pop()
+                dict_two_list = dictionary_stack.pop()
+                if word == "and":
+                    dictionary_stack.append([{key: dict_one_list[0][key] for key in dict_one_list[0] if
+                                              key in dict_two_list[0]}, dict_one_list[1] | dict_two_list[1]])
+                else:
+                    dictionary_stack.append(
+                        [dict(Counter(dict_one_list[0]) + Counter(dict_two_list[0])),
+                         dict_one_list[1] & dict_two_list[1]])
         else:
             remove_flag = False
             if remove_flag_single_char:
@@ -186,8 +190,7 @@ def create_results_set(user_input):
                                 dict_two_list = dictionary_stack.pop()
                                 dictionary_stack.append(
                                     [dict(Counter(dict_one_list[0]) + Counter(dict_two_list[0])),
-                                     dict(Counter(dict_one_list[1]) + Counter(dict_two_list[1]))])
-
+                                     dict_one_list[1] & dict_two_list[1]])
                 else:
                     if word in search_dict:
                         create_results_set_helper(dictionary_stack, word, remove_flag)
@@ -201,7 +204,7 @@ def create_results_set(user_input):
                             create_results_set_helper(dictionary_stack, singular_str,
                                                       remove_flag)
                         else:  # this is for the cases there are no results - should work
-                            dictionary_stack.append([{}, {}])
+                            dictionary_stack.append([{}, set()])
     return {k: v for k, v in dictionary_stack[0][0].items() if k not in dictionary_stack[0][1]} if len(
         dictionary_stack) >= 1 and len(
         dictionary_stack[0]) > 1 else dictionary_stack[0][0] if len(dictionary_stack) >= 1 and len(
@@ -217,18 +220,15 @@ def create_results_set_helper(dictionary_stack, key, remove_flag=False):
     :param remove_flag: remove_flag which determines whether to add extra data to results_set
     :return: None
     """
-    dictionary_stack.append([{}, {}])
     if remove_flag:
         for tag in search_dict[key]:
-            if tag not in dictionary_stack[-1][1]:
-                dictionary_stack[-1][1][tag] = 1
+            dictionary_stack[-1][1].add(tag)
     else:
+        dictionary_stack.append([{}, set()])
         for site in search_dict[key]:
             if site in site_dict and key in site_dict[site][1]:
                 if site in dictionary_stack[-1][0]:
-                    dictionary_stack[-1][0][site] = \
-                        dictionary_stack[-1][0][site] + search_ranking_algorithm(site_dict[site][1][key])
+                    dictionary_stack[-1][0][site] += search_ranking_algorithm(site_dict[site][1][key])
                     # 1 in site_dict[site] is for relevancy dictionary, since 0 is the title - needed for speeding up and eliminating NoSQLdb calls
                 else:
-                    # print(key in NoSQLdb.retrieve_kv_site_db_dictionary(site).keys())
                     dictionary_stack[-1][0][site] = search_ranking_algorithm(site_dict[site][1][key])
