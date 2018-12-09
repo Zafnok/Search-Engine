@@ -78,7 +78,7 @@ def store_kv_site_db(key, value):
         delete_list = [i for i in retrieve_kv_site_db_dictionary(key) if i not in value[2]]
         for item in delete_list:
             temp_list = retrieve_kv_search_db(item)
-            del temp_list[item][key]
+            del temp_list[key]  # changed - think it was trying to access a set as a dictionary before
             search_dictionary_db[item] = temp_list
     site_dictionary_db[key] = value
 
